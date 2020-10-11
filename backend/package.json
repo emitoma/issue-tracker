@@ -6,12 +6,17 @@
   "scripts": {
     "start": "nodemon src/index.js",
     "test": "jest",
-    "lint": "eslint index.js"
+    "lint": "eslint index.js",
+    "migrate": "migrate"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "migrate": "^1.7.0",
+    "mysql2": "^2.2.5"
+  },
   "devDependencies": {
     "eslint": "^7.11.0",
     "eslint-config-esnext": "^4.1.0",
