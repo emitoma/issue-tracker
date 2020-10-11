@@ -1,1 +1,3 @@
-console.log(`It's working!`);
+const dummyFunc = (a, b) => a + b;
+
+module.exports = dummyFunc;
