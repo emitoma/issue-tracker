@@ -6,7 +6,8 @@ defaults:
 
 on:
   pull_request:
-    paths: -'backend/**'
+    paths:
+      - 'backend/**'
 
 jobs:
   build:
