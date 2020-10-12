@@ -12,6 +12,7 @@ if (dotenvExists) {
 }
 
 module.exports = {
+  port: process.env.PORT,
   mysql: {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,

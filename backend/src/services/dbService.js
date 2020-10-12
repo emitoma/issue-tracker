@@ -7,7 +7,6 @@ const mysqlConfig = {
   password: config.mysql.password,
   database: config.mysql.database,
 };
-console.log(mysqlConfig);
 
 const db = {
   pool: null,
