@@ -3,6 +3,11 @@ name: backend
 defaults:
   run:
     working-directory: ./backend
+    env:
+      DB_HOST: localhost
+      DB_USER: root
+      DB_PASSWORD: password
+      DB_NAME: issue_tracker
 
 on:
   pull_request:
@@ -16,6 +21,19 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x]
+
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_DATABASE: issue_tracker
+          MYSQL_ROOT_PASSWORD:
+          MYSQL_USER: root
+          MYSQL_PASSWORD: password
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        port:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - uses: actions/checkout@v2
