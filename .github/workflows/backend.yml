@@ -3,11 +3,6 @@ name: backend
 defaults:
   run:
     working-directory: ./backend
-    env:
-      DB_HOST: localhost
-      DB_USER: root
-      DB_PASSWORD: password
-      DB_NAME: issue_tracker
 
 on:
   pull_request:
@@ -42,7 +37,18 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn --frozen-lockfile
+      - run: yarn migrate up
+        env:
+          DB_HOST: localhost
+          DB_USER: root
+          DB_PASSWORD: password
+          DB_NAME: issue_tracker
 
       - run: yarn test
+        env:
+          DB_HOST: localhost
+          DB_USER: root
+          DB_PASSWORD: password
+          DB_NAME: issue_tracker
 
       - run: yarn lint
