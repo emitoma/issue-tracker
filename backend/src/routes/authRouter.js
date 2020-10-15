@@ -5,20 +5,21 @@ const router = express.Router();
 
 router.use(express.json());
 
-router.post('/register', (req, res) => {
-  const data = authService.register(
+router.post('/register', async (req, res) => {
+  const data = await authService.register(
     req.body.emailAddress,
     req.body.password,
     req.body.repeatPassword
   );
-  console.log(data);
+  console.log('router data', data);
 
   if (data.status === 200) {
     res.status(200).json(data);
-  } else if (data.status === 401) {
-    res.status(401).json(data);
-  } else if (data.status === 500) {
-    res.status(500).json(data);
+  } else if (data.status === 400) {
+    res.status(400).json(data);
+  }else {
+    res.status(data.status).json(data);
+
   }
 });
 

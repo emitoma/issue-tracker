@@ -4,18 +4,17 @@ const schema = Joi.object({
   email: Joi.string()
     .email({ minDomainSegments: 2, tlds: { allow: true } })
     .required()
-    .message({
-      'any.required': 'Email cannot be empty!',
-      'any.invalid': 'Invalid email address',
+    .messages({
+      'string.empty': 'kek',
+      'string.email': 'kok',
     }),
 
   password: Joi.string()
-    .pattern(/^[a-zA-Z0-9]{6,30}$/)
     .required()
+    .pattern(/^[a-zA-Z0-9]{6,30}$/)
     .message({
-      'string.pattern.base':
-        'Password should not contain special characters and should not be shorter then 6 characters or longer than 30',
-      'any.required': 'Password cannot be empty!',
+      'pattern.empty': 'empty',
+      'string.password': 'password',
     }),
 
   repeat_password: Joi.ref('password'),
