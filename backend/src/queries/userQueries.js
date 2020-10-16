@@ -1,9 +1,7 @@
 const dbService = require('../services/dbService');
 
-const createUser = async (emailAddress, passwordHash) => {
+const createUser = async ({ emailAddress, passwordHash }) => {
   const db = dbService.getDBPool();
-
-  console.log('query data 1', emailAddress, passwordHash);
 
   const [
     rows,
@@ -17,10 +15,12 @@ const createUser = async (emailAddress, passwordHash) => {
 const findUserByEmail = async (emailAddress) => {
   const db = dbService.getDBPool();
 
-  const [rows] = await db.query(
+  const [
+    rows,
+  ] = await db.query(
     'SELECT `email_address` FROM `user` WHERE `email_address`=?;',
-    [emailAddress]);
-  console.log('rows0', rows);
+    [emailAddress]
+  );
   return rows[0];
 };
 const userQueries = {

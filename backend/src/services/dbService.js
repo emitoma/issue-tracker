@@ -13,6 +13,7 @@ const db = {
 };
 
 const dbPool = () => {
+  console.log('INIT DB');
   db.pool = mysql.createPool(mysqlConfig);
 };
 
