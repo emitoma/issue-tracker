@@ -13,6 +13,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      DB_HOST: localhost
+      DB_USER: user123
+      DB_PASSWORD: password123
+      DB_NAME: issue_tracker
+
     strategy:
       matrix:
         node-version: [14.x]
@@ -21,11 +27,9 @@ jobs:
       mysql:
         image: mysql:8
         env:
-          MYSQL_DATABASE: issue_tracker
-          MYSQL_ROOT_PASSWORD:
-          MYSQL_USER: root
-          MYSQL_PASSWORD: password123
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: $DB_NAME
+          MYSQL_USER: $DB_USER
+          MYSQL_PASSWORD: $DB_PASSWORD
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -38,18 +42,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: yarn --frozen-lockfile
       - run: yarn migrate up
-        env:
-          DB_HOST: localhost
-          DB_USER: root
-          DB_PASSWORD: password
-          DB_NAME: issue_tracker
 
       - run: yarn test
-        env:
-          DB_HOST: localhost
-          DB_USER: root
-          DB_PASSWORD: password
-          DB_NAME: issue_tracker
-          SECRET: secret
 
       - run: yarn lint
