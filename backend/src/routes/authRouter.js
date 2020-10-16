@@ -17,9 +17,8 @@ router.post('/register', async (req, res) => {
     res.status(200).json(data);
   } else if (data.status === 400) {
     res.status(400).json(data);
-  }else {
+  } else {
     res.status(data.status).json(data);
-
   }
 });
 

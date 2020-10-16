@@ -15,14 +15,10 @@ const validateRegister = (inputEmail, inputPassword, inputPwRepeat) => {
 const register = async (emailAddress, password, repeatPassword) => {
   try {
     try {
-      const validValue = await validateRegister(
-        emailAddress,
-        password,
-        repeatPassword
-      );
+      await validateRegister(emailAddress, password, repeatPassword);
     } catch (error) {
-      //console.log('validation error', error.annotate());
-      //console.error(error);
+      // console.log('validation error', error.annotate());
+      // console.error(error);
       if (error.isJoi !== true) {
         throw error;
       }
@@ -31,8 +27,8 @@ const register = async (emailAddress, password, repeatPassword) => {
         errors: buildResponseFromJoiErrors(error),
       };
     }
-     const dbUser = await userQueries.findUserByEmail(emailAddress);
-     
+    const dbUser = await userQueries.findUserByEmail(emailAddress);
+
     if (dbUser) {
       return {
         status: 400,
