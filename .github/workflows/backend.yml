@@ -23,7 +23,7 @@ jobs:
         env:
           MYSQL_DATABASE: issue_tracker
           MYSQL_ROOT_PASSWORD:
-          MYSQL_USER: root
+          MYSQL_USER: user
           MYSQL_PASSWORD: password
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
         ports:
