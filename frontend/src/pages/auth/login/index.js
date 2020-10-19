@@ -3,17 +3,20 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import './style.css';
+import css from './style.module.scss';
 
-import AuthHeader from './AuthHeader';
+import AuthHeader from '../../../components/auth/index';
+import { useState } from 'react';
 
 const Login = () => {
-  return (
-    <Container fluid className="Login">
-      <h1 className="Login-title">Tracker App</h1>
+  const [isLogin, setIsLogin] = useState(true);
 
-      <div className="form-container ">
-        <AuthHeader />
+  return (
+    <Container fluid className={css['Login']}>
+      <h1 className={css['title']}>Tracker App</h1>
+
+      <div className={css['form-container']}>
+        <AuthHeader isLogin={isLogin} setIsLogin={setIsLogin} />
         <Form>
           <Form.Group>
             <Form.Control type="email" placeholder="Email address" />
