@@ -1,0 +1,9 @@
+const authActionTypes = Object.freeze({
+  REGISTER_REQUEST: 'AUTH/REGISTER_REQUEST',
+  REGISTER_SUCCESS: 'AUTH/REGISTER_SUCCESS',
+  REGISTER_ERROR: 'AUTH/REGISTER_ERROR',
+
+  CLEAR_ERRORS: 'AUTH/CLEAR_ERRORS',
+});
+
+export default authActionTypes;

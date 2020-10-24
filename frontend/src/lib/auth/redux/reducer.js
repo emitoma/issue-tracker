@@ -1,10 +1,37 @@
+import authActionTypes from './action-types';
+
 const initialState = {
-  isLoggedIn: null,
+  isRegistered: null,
   user: null,
+  registerErrors: [],
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
+    case authActionTypes.REGISTER_REQUEST:
+      return {
+        ...state,
+        registerErrors: [],
+      };
+
+    case authActionTypes.REGISTER_SUCCESS:
+      return {
+        ...state,
+        isRegistered: true,
+      };
+
+    case authActionTypes.REGISTER_ERRORS:
+      return {
+        ...state,
+        registerErrors: action.payload.errors,
+      };
+
+    case authActionTypes.CLEAR_ERRORS:
+      return {
+        ...state,
+        registerErrors: [],
+      };
+
     default:
       return state;
   }
