@@ -3,22 +3,22 @@ const buildResponseFromJoiErrors = require('../utils/buildResponseFromJoiErrors'
 const registerSchema = require('../validation-schemas/registerSchema');
 const bcrypt = require('bcrypt');
 
-const validateRegister = (inputEmail, inputPassword, inputPwRepeat) => {
+const validateRegister = (email, password, passwordAgain) => {
   const data = {
-    email: inputEmail,
-    password: inputPassword,
-    repeat_password: inputPwRepeat,
+    email,
+    password,
+    passwordAgain,
   };
   return registerSchema.validateAsync(data);
 };
 
-const register = async (emailAddress, password, repeatPassword) => {
+const register = async (email, password, passwordAgain) => {
   try {
     try {
-      await validateRegister(emailAddress, password, repeatPassword);
+      await validateRegister(email, password, passwordAgain);
     } catch (error) {
       // console.log('validation error', error.annotate());
-      // console.error(error);
+      console.error(error);
       if (error.isJoi !== true) {
         throw error;
       }
@@ -27,7 +27,7 @@ const register = async (emailAddress, password, repeatPassword) => {
         errors: buildResponseFromJoiErrors(error),
       };
     }
-    const dbUser = await userQueries.findUserByEmail(emailAddress);
+    const dbUser = await userQueries.findUserByEmail(email);
 
     if (dbUser) {
       return {
@@ -38,7 +38,10 @@ const register = async (emailAddress, password, repeatPassword) => {
 
     const passwordHash = await bcrypt.hash(password, 10);
     console.log(passwordHash);
-    const newUser = await userQueries.createUser(emailAddress, passwordHash);
+    const newUser = await userQueries.createUser({
+      email,
+      password: passwordHash,
+    });
     console.log(newUser, '2');
     return {
       status: 200,

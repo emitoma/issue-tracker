@@ -5,19 +5,20 @@ const schema = Joi.object({
     .email({ minDomainSegments: 2, tlds: { allow: true } })
     .required()
     .messages({
-      'string.empty': 'kek',
-      'string.email': 'kok',
+      'string.empty': 'Email is required.',
+      'string.email': 'Email is not valid.',
     }),
 
   password: Joi.string()
+    .pattern(/^.{6,255}$/)
     .required()
-    .pattern(/^[a-zA-Z0-9]{6,30}$/)
-    .message({
-      'pattern.empty': 'empty',
-      'string.password': 'password',
+    .messages({
+      'any.required': 'Password is required.',
+      'string.empty': 'Password is required.',
+      'string.pattern.base': 'Password should be at least 6 characters long.',
     }),
 
-  repeat_password: Joi.ref('password'),
-});
+  passwordAgain: Joi.ref('password'),
+}).with('password', 'passwordAgain');
 
 module.exports = schema;

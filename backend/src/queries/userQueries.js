@@ -1,26 +1,23 @@
 const dbService = require('../services/dbService');
 
-const createUser = async ({ emailAddress, passwordHash }) => {
+const createUser = async ({ email, password }) => {
   const db = dbService.getDBPool();
 
   const [
     rows,
-  ] = await db.query(
-    'INSERT INTO `user` (  `email_address` ,`password_hash`) VALUES (?,?);',
-    [emailAddress, passwordHash]
-  );
+  ] = await db.query('INSERT INTO `user` (`email`, `password`) VALUES (?,?);', [
+    email,
+    password,
+  ]);
   return rows.insertId;
 };
 
-const findUserByEmail = async (emailAddress) => {
+const findUserByEmail = async (email) => {
   const db = dbService.getDBPool();
 
-  const [
-    rows,
-  ] = await db.query(
-    'SELECT `email_address` FROM `user` WHERE `email_address`=?;',
-    [emailAddress]
-  );
+  const [rows] = await db.query('SELECT `email` FROM `user` WHERE `email`=?;', [
+    email,
+  ]);
   return rows[0];
 };
 const userQueries = {

@@ -7,9 +7,9 @@ router.use(express.json());
 
 router.post('/register', async (req, res) => {
   const data = await authService.register(
-    req.body.emailAddress,
+    req.body.email,
     req.body.password,
-    req.body.repeatPassword
+    req.body.passwordAgain
   );
   console.log('router data', data);
 

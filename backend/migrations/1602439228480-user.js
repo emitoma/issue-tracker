@@ -4,7 +4,7 @@ module.exports.up = async function () {
   const conn = await dbService.createConnection();
 
   await conn.execute(
-    'CREATE TABLE `user` (`id` INT AUTO_INCREMENT NOT NULL PRIMARY KEY, `email_address` VARCHAR(255) NOT NULL UNIQUE, `password_hash` VARCHAR(255) NOT NULL);'
+    'CREATE TABLE `user` (`id` INT AUTO_INCREMENT NOT NULL PRIMARY KEY, `email` VARCHAR(255) NOT NULL UNIQUE, `password` VARCHAR(255) NOT NULL);'
   );
 
   conn.end();
