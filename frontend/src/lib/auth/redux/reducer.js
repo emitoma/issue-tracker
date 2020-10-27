@@ -20,7 +20,7 @@ const authReducer = (state = initialState, action) => {
         isRegistered: true,
       };
 
-    case authActionTypes.REGISTER_ERRORS:
+    case authActionTypes.REGISTER_ERROR:
       return {
         ...state,
         registerErrors: action.payload.errors,

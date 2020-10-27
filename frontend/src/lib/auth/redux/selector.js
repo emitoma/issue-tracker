@@ -1,4 +1,4 @@
-const getState = (state) => state.user;
+const getState = (state) => state.auth;
 
 const getRegisterErrors = (state) => getState(state).registerErrors;
 
