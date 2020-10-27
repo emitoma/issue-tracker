@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import register from '../../../../lib/auth/redux/thunks/register';
+import authSelectors from '../../../../lib/auth/redux/selector'
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert'
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
+  //const errors = useSelector(authSelectors.getRegisterErrors);
+  
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -20,6 +24,9 @@ const RegisterForm = () => {
 
   return (
     <Form onSubmit={onSubmit}>
+
+
+
       <Form.Group>
         <Form.Label>Email</Form.Label>
         <Form.Control
