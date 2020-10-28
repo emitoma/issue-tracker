@@ -1,7 +1,7 @@
 import authActionTypes from './action-types';
 
 const initialState = {
-  isRegistered: null,
+  isRegistered: false,
   user: null,
   registerErrors: [],
 };
@@ -11,6 +11,7 @@ const authReducer = (state = initialState, action) => {
     case authActionTypes.REGISTER_REQUEST:
       return {
         ...state,
+        isRegistered: false,
         registerErrors: [],
       };
 
