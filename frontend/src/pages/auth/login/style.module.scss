@@ -1,0 +1,30 @@
+.Login {
+  background-color: #1e5dff;
+  height: 100%;
+
+  .title {
+    font-family: 'Leckerli One', cursive;
+    font-weight: normal;
+    font-size: 64px;
+    line-height: 86px;
+    text-align: center;
+    margin: 0 0 100px;
+    padding-top: 200px;
+
+    background-color: #002a96;
+    color: transparent;
+    text-shadow: 2px 2px 3px #0047ff80;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+  }
+
+  .form-container {
+    background-color: #ffffff;
+    width: 470px;
+    max-width: 100%;
+    padding: 25px;
+    border-radius: 8px;
+    margin: 0 auto;
+  }
+}

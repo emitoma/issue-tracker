@@ -7,13 +7,13 @@ const mysqlConfig = {
   password: config.mysql.password,
   database: config.mysql.database,
 };
-console.log(mysqlConfig);
 
 const db = {
   pool: null,
 };
 
 const dbPool = () => {
+  console.log('INIT DB');
   db.pool = mysql.createPool(mysqlConfig);
 };
 
