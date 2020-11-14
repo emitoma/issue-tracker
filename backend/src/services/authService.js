@@ -56,8 +56,30 @@ const register = async (email, password, passwordAgain) => {
   }
 };
 
+const login = async (email, password) => {
+  console.log("service")
+  try {
+    console.log("service try-catch")
+    const dbUser = await userQueries.findUserWithPasswordByEmail(email);
+    console.log(dbUser)
+    return {
+      status: 200,
+      message: 'working'
+    }
+
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: 'Something went wrong!'
+    }
+    
+  }
+}
+
 const authService = {
   register,
+  login
 };
 
 module.exports = authService;
