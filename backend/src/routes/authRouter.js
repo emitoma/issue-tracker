@@ -29,11 +29,13 @@ router.post('/login', async (req, res) => {
     req.body.email,
     req.body.password
   );
-  console.log(data)
+  
+  console.log(data);
+
   if (data.status === 200) {
     res.status(200).json(data);
-  } else if (data.status === 400) {
-    res.status(400).json(data);
+  } else if (data.status === 403) {
+    res.status(403).json(data);
   } else {
     res.status(data.status).json(data);
   }
