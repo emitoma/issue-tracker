@@ -24,17 +24,17 @@ const findUserByEmail = async (email) => {
 const findUserForLogin = async (email) => {
   const db = dbService.getDBPool();
 
-  const [rows] = await db.query('SELECT * FROM `user` WHERE `email`=?;', [email]);
+  const [rows] = await db.query('SELECT * FROM `user` WHERE `email`=?;', [
+    email,
+  ]);
 
   return rows[0];
-
 };
-
 
 const userQueries = {
   createUser,
   findUserByEmail,
-  findUserForLogin
+  findUserForLogin,
 };
 
 module.exports = userQueries;

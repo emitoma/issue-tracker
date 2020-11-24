@@ -18,10 +18,10 @@ const validateRegister = (email, password, passwordAgain) => {
 const validateLogin = (email, password) => {
   const data = {
     email,
-    password
+    password,
   };
   return loginSchema.validateAsync(data);
-}
+};
 
 const createJWTToken = (payload) => {
   return new Promise((resolve, reject) => {
@@ -60,7 +60,7 @@ const register = async (email, password, passwordAgain) => {
 
     const passwordHash = await bcrypt.hash(password, 10);
 
-    const newUser = await userQueries.createUser({
+    await userQueries.createUser({
       email,
       password: passwordHash,
     });
@@ -69,7 +69,6 @@ const register = async (email, password, passwordAgain) => {
       status: 200,
       message: 'User created',
     };
-
   } catch (error) {
     console.error(error);
     return {
@@ -81,11 +80,10 @@ const register = async (email, password, passwordAgain) => {
 
 const login = async (email, password) => {
   try {
-    //TODO: make joi error messages more accurate for the login
     try {
       await validateLogin(email, password);
     } catch (error) {
-      console.error(error)
+      console.error(error);
       if (error.isJoi !== true) {
         throw error;
       }
@@ -95,42 +93,37 @@ const login = async (email, password) => {
       };
     }
 
-
-
     const dbUser = await userQueries.findUserForLogin(email);
 
     const isPasswordOk = await bcrypt.compare(password, dbUser.password);
 
     if (isPasswordOk) {
       const token = await createJWTToken({
-        email: dbUser.email
-      })
+        email: dbUser.email,
+      });
 
       return {
         status: 200,
         token: token,
-      }
-
+      };
     } else {
       return {
         status: 403,
-        message: 'Username or password is not correct.'
-      }
+        message: 'Email address or password is not correct.',
+      };
     }
-
   } catch (error) {
     console.error(error);
     return {
       status: 500,
-      message: 'Something went wrong!'
-    }
-
+      message: 'Something went wrong!',
+    };
   }
-}
+};
 
 const authService = {
   register,
-  login
+  login,
 };
 
 module.exports = authService;

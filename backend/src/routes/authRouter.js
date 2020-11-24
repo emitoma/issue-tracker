@@ -23,13 +23,10 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  console.log("router")
+  console.log('router');
 
-  const data = await authService.login(
-    req.body.email,
-    req.body.password
-  );
-  
+  const data = await authService.login(req.body.email, req.body.password);
+
   console.log(data);
 
   if (data.status === 200) {
