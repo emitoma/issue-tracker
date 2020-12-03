@@ -94,7 +94,12 @@ const login = async (email, password) => {
     }
 
     const dbUser = await userQueries.findUserForLogin(email);
-
+    if (!dbUser) {
+      return {
+        status: 403,
+        message: 'No user with this email.',
+      };
+    }
     const isPasswordOk = await bcrypt.compare(password, dbUser.password);
 
     if (isPasswordOk) {
