@@ -1,10 +1,10 @@
 import authActions from '../actions';
 
-const register = ({ formData, setFormErrors }) => async (dispatch) => {
-  dispatch(authActions.registerRequest());
+const login = ({ formData, setFormErrors }) => async (dispatch) => {
+  dispatch(authActions.loginRequest());
   try {
     const response = await fetch(
-      process.env.REACT_APP_API_URL + '/api/auth/register',
+      process.env.REACT_APP_API_URL + '/api/auth/login',
       {
         method: 'POST',
         headers: {
@@ -14,31 +14,30 @@ const register = ({ formData, setFormErrors }) => async (dispatch) => {
       }
     );
 
-    const json = await response.json();
     if (response.status < 200 || response.status >= 300) {
+      const json = await response.json();
       console.log(response.status);
 
       if (json.errors) {
         const errors = {
           email: json.errors.email || '',
           password: json.errors.password || '',
-          passwordAgain: json.errors.passwordAgain || '',
         };
         console.log('errors', json.errors);
         setFormErrors(errors);
       }
 
-      dispatch(authActions.registerError(json.message ? [json.message] : []));
+      dispatch(authActions.loginError(json.message ? [json.message] : []));
     }
 
-    // const json = await response.json();
+    const json = await response.json();
     console.log(json);
 
-    dispatch(authActions.registerSuccess({}));
+    dispatch(authActions.loginSuccess(json.token));
   } catch (error) {
     console.error(error);
-    dispatch(authActions.registerError(['Unknown error']));
+    dispatch(authActions.loginError(['Unknown error']));
   }
 };
 
-export default register;
+export default login;
