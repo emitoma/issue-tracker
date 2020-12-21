@@ -26,15 +26,17 @@ const register = ({ formData, setFormErrors }) => async (dispatch) => {
         };
         console.log('errors', json.errors);
         setFormErrors(errors);
-      }
+      } 
 
       dispatch(authActions.registerError(json.message ? [json.message] : []));
+    } else {
+
+      dispatch(authActions.registerSuccess({}));
+
     }
 
     // const json = await response.json();
     console.log(json);
-
-    dispatch(authActions.registerSuccess({}));
   } catch (error) {
     console.error(error);
     dispatch(authActions.registerError(['Unknown error']));

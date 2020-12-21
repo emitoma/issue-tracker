@@ -34,20 +34,16 @@ const LoginForm = () => {
     };
     dispatch(login({ formData, setFormErrors }));
   };
+    console.log("formerr",formErrors)
 
   return (
     <Form onSubmit={onSubmit}>
       <div>
-        {errors.map((err, index) => {
-          console.log(
-            err,
-            'err'
-          )(
-            <Alert variant='danger' key={index}>
+        {errors.map((err, index) =>
+            (<Alert variant='danger' key={index}>
               {err}
-            </Alert>
-          );
-        })}
+            </Alert>)
+        )}
       </div>
 
       {isLoggedIn && <Alert variant='success'>Login is successful</Alert>}
@@ -55,11 +51,12 @@ const LoginForm = () => {
       <Form.Group>
         <Form.Label>Email</Form.Label>
         <Form.Control
+            isInvalid={!!formErrors.email}
           type='email'
           placeholder='john@doe.com'
           onChange={(e) => setEmail(e.target.value)}
         />
-        {formErrors.emil && (
+        {formErrors.email && (
           <Form.Control.Feedback type='invalid'>
             {formErrors.email}
           </Form.Control.Feedback>
@@ -70,6 +67,7 @@ const LoginForm = () => {
         <Form.Label>Password</Form.Label>
 
         <Form.Control
+            isInvalid={!!formErrors.password}
           type='password'
           onChange={(e) => setPassword(e.target.value)}
         />

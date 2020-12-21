@@ -14,8 +14,8 @@ const login = ({ formData, setFormErrors }) => async (dispatch) => {
       }
     );
 
+    const json = await response.json();
     if (response.status < 200 || response.status >= 300) {
-      const json = await response.json();
       console.log(response.status);
 
       if (json.errors) {
@@ -28,12 +28,15 @@ const login = ({ formData, setFormErrors }) => async (dispatch) => {
       }
 
       dispatch(authActions.loginError(json.message ? [json.message] : []));
+    } else {
+
+      dispatch(authActions.loginSuccess(json.token));
+
     }
 
-    const json = await response.json();
-    console.log(json);
 
-    dispatch(authActions.loginSuccess(json.token));
+    //const json = await response.json();
+    console.log(json);
   } catch (error) {
     console.error(error);
     dispatch(authActions.loginError(['Unknown error']));
