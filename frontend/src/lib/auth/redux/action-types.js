@@ -4,6 +4,10 @@ const authActionTypes = Object.freeze({
   REGISTER_ERROR: 'AUTH/REGISTER_ERROR',
 
   CLEAR_ERRORS: 'AUTH/CLEAR_ERRORS',
+
+  LOGIN_REQUEST: 'AUTH/LOGIN_REQUEST',
+  LOGIN_SUCCESS: 'AUTH/LOGIN_SUCCESS',
+  LOGIN_ERROR: 'AUTH/LOGIN_ERROR',
 });
 
 export default authActionTypes;

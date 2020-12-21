@@ -2,8 +2,10 @@ import authActionTypes from './action-types';
 
 const initialState = {
   isRegistered: false,
-  user: null,
+  token: null,
+  isLoggedIn: false,
   registerErrors: [],
+  loginErrors: [],
 };
 
 const authReducer = (state = initialState, action) => {
@@ -31,6 +33,28 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         registerErrors: [],
+        loginErrors: [],
+      };
+
+    case authActionTypes.LOGIN_REQUEST:
+      return {
+        ...state,
+        isLoggedIn: false,
+        token: null,
+        loginErrors: [],
+      };
+
+    case authActionTypes.LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLoggedIn: true,
+        token: action.payload.token,
+      };
+
+    case authActionTypes.LOGIN_ERROR:
+      return {
+        ...state,
+        loginErrors: action.payload.errors,
       };
 
     default:

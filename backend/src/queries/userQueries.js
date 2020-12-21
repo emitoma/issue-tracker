@@ -20,9 +20,21 @@ const findUserByEmail = async (email) => {
   ]);
   return rows[0];
 };
+
+const findUserForLogin = async (email) => {
+  const db = dbService.getDBPool();
+
+  const [rows] = await db.query('SELECT * FROM `user` WHERE `email`=?;', [
+    email,
+  ]);
+
+  return rows[0];
+};
+
 const userQueries = {
   createUser,
   findUserByEmail,
+  findUserForLogin,
 };
 
 module.exports = userQueries;

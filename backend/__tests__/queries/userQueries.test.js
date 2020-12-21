@@ -9,14 +9,27 @@ beforeAll(() => {
 describe('User query test', () => {
   test('user exists', async () => {
     await userQueries.createUser({
-      email: 'testemail@test.com',
+      email: 'testemail12@test.com',
       password: '$10$8Lela8UFALWw/e41Fdc5auYdoCHhEyywf7Vfz2m8EwwdX1e2FZ.k.',
     });
 
-    console.log(db, 'db in test');
+    const [user] = await db.query('SELECT * FROM `user` WHERE email = ?', [
+      'testemail12@test.com',
+    ]);
+    expect(user).toHaveLength(1);
+  });
+});
+
+describe('Find user for login test', () => {
+  test('found user is correct', async () => {
+    const userByEmail = await userQueries.findUserForLogin(
+      'testemail@test.com'
+    );
+
     const [user] = await db.query('SELECT * FROM `user` WHERE email = ?', [
       'testemail@test.com',
     ]);
-    expect(user).toHaveLength(1);
+
+    expect(user).toEqual(user);
   });
 });
