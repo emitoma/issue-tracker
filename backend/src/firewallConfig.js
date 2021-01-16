@@ -1,3 +1,4 @@
-const anonimRoutes = ['/api/auth/login', '/api/auth/register'];
-
-module.exports = anonimRoutes;
+const firewallConfig = {
+  anonymousRoutes: ['/api/auth/login', '/api/auth/register'],
+};
+module.exports = firewallConfig;

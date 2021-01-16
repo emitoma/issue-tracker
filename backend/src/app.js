@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 
-const anonimRoutes = require('./firewallConfig');
 const firewallMiddleware = require('./middlewares/firewallMiddleware');
 
 const authRouter = require('./routes/authRouter');
@@ -12,20 +11,7 @@ const app = express();
 
 app.use(cors());
 
-app.use((req, res, next) => {
-  if (anonimRoutes.includes(req.path)) {
-    next();
-    return;
-  }
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.split(' ')[0] === 'Bearer'
-  ) {
-    return firewallMiddleware.verifyJWTToken(
-      req.headers.authorization.split(' ')[0]
-    );
-  }
-});
+app.use(firewallMiddleware());
 
 app.get('/', (req, res) => {
   res.send('Hello world');
