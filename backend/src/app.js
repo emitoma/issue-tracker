@@ -4,7 +4,7 @@ const cors = require('cors');
 const firewallMiddleware = require('./middlewares/firewallMiddleware');
 
 const authRouter = require('./routes/authRouter');
-// const projectsRouter = require('./routes/projectRouter');
+const projectsRouter = require('./routes/projectRouter');
 // const issueRouter = require('./routes/issuesRouter');
 
 const app = express();
@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRouter);
 
-// app.use('api/projects/{projectId}/issues', issueRouter);
-// app.use('api/projects', projectsRouter);
+//app.use('api/projects/{projectId}/issues', issueRouter);
+app.use('api/projects', projectsRouter);
 
 module.exports = app;
