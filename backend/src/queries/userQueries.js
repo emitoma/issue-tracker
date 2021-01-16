@@ -15,7 +15,7 @@ const createUser = async ({ email, password }) => {
 const findUserByEmail = async (email) => {
   const db = dbService.getDBPool();
 
-  const [rows] = await db.query('SELECT `email` FROM `user` WHERE `email`=?;', [
+  const [rows] = await db.query('SELECT * FROM `user` WHERE `email`=?;', [
     email,
   ]);
   return rows[0];

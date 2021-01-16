@@ -11,7 +11,7 @@ module.exports.up = async function (next) {
 
 module.exports.down = async function (next) {
   const conn = await dbService.createConnection();
-  await conn.execute('DROP TABLE `issue`');
+  await conn.execute('DROP TABLE `issue`;');
 
   conn.end();
 };
