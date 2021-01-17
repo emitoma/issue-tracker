@@ -7,7 +7,7 @@ const hasPermission = (paramName) => async (req, res, next) => {
   const projectId = req.params[paramName];
   const dbProject = await projectQueries.findProjectByID(projectId);
 
-  if (req.locals.user.id !== dbProject['owner_id']) {
+  if (req.locals.user.id !== dbProject.owner_id) {
     return res.status(403).send('Forbidden.');
   }
 
