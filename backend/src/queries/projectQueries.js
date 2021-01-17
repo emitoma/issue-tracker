@@ -39,10 +39,21 @@ const removeProjectById = async (projectId, ownerId) => {
   return rows;
 };
 
+const findProjectByID = async (projectId) => {
+  const db = dbService.getDBPool();
+  console.log(projectId);
+  const [rows] = await db.query('SELECT * FROM `project` WHERE id=?;', [
+    projectId,
+  ]);
+
+  return rows[0];
+};
+
 const projectQueries = {
   getProjectsByOwnerId,
   addNewProject,
   removeProjectById,
+  findProjectByID,
 };
 
 module.exports = projectQueries;

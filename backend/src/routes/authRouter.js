@@ -3,8 +3,6 @@ const authService = require('../services/authService');
 
 const router = express.Router();
 
-router.use(express.json());
-
 router.post('/register', async (req, res) => {
   const data = await authService.register(
     req.body.email,

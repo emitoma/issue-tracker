@@ -29,7 +29,7 @@ const firewallMiddleware = () => async (req, res, next) => {
       req.locals = {};
     }
     req.locals.user = await userQueries.findUserByEmail(decodedToken.email);
-    console.log(req.locals.user);
+    console.log(req.locals.user, 'locals');
     return next();
   } catch (err) {
     console.error(err);

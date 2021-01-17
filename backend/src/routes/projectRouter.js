@@ -2,10 +2,10 @@ const express = require('express');
 const projectService = require('../services/projectsService');
 
 const router = express.Router();
-router.use(express.json());
 
 router.get('/', async (req, res) => {
   console.log('router');
+  console.log(req.locals.user);
   const data = await projectService.listProjectsOfUser(req.locals.user.id);
 
   res.send(data);
@@ -20,13 +20,7 @@ router.post('/', async (req, res) => {
   );
   console.log(data);
 
-  if (data.status === 201) {
-    res.status(201).json(data);
-  } else if (data.status === 400) {
-    res.status(400).json(data);
-  } else {
-    res.status(data.status).json(data.message);
-  }
+  res.status(data.status).json(data);
 });
 
 router.delete('/:id', async (req, res) => {

@@ -18,6 +18,7 @@ const findUserByEmail = async (email) => {
   const [rows] = await db.query('SELECT * FROM `user` WHERE `email`=?;', [
     email,
   ]);
+  console.log(rows);
   return rows[0];
 };
 
