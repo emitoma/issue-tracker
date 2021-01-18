@@ -9,10 +9,15 @@ const getIssuesByProjectId = async (projectId) => {
   return rows;
 };
 
-const getIssueById = async (issueId) => {
+const getIssueById = async (issueId, projectId) => {
   const db = dbService.getDBPool();
 
-  const [rows] = await db.query('SELECT * FROM `issue` WHERE id=?', [issueId]);
+  const [
+    rows,
+  ] = await db.query('SELECT * FROM `issue` WHERE id=? AND project_id=?;', [
+    issueId,
+    projectId,
+  ]);
 
   return rows[0];
 };
@@ -32,23 +37,22 @@ const removeIssueById = async (issueId, projectId) => {
   const db = dbService.getDBPool();
   const [
     rows,
-  ] = await db.query(' DELETE FROM `issue` WHERE project_id=? AND id=?;', [
+  ] = await db.query('DELETE FROM `issue` WHERE project_id=? AND id=?;', [
     projectId,
     issueId,
   ]);
   return rows;
 };
 
-const updateIssueById = async (id, issueProps) => {
+const updateIssueById = async (id, issueProps, projectId) => {
   const db = dbService.getDBPool();
 
   const [
     rows,
-  ] = await db.query('UPDATE `issue` SET title=?, status=?  WHERE id= ?;', [
-    issueProps.title,
-    issueProps.status,
-    id,
-  ]);
+  ] = await db.query(
+    'UPDATE `issue` SET title=?, status=?  WHERE project_id=? AND id= ?;',
+    [issueProps.title, issueProps.status, projectId, id]
+  );
 
   return rows;
 };

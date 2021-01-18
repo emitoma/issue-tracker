@@ -18,6 +18,7 @@ const listIssuesOfProject = async (projectId) => {
 
 const addNewIssue = async (title, issueStatus, projectId) => {
   try {
+    // TODO move validation to a validator
     if (title === undefined || title === null) {
       return {
         status: 400,
@@ -55,7 +56,7 @@ const removeIssue = async (issueId, projectId) => {
   }
 };
 
-const updateIssue = async (issueId, issueProps) => {
+const updateIssue = async (issueId, issueProps, projectId) => {
   try {
     const dbIssue = await issueQueries.getIssueById(issueId);
 
@@ -65,7 +66,12 @@ const updateIssue = async (issueId, issueProps) => {
     if (issueProps.status === undefined || issueProps.status === null) {
       issueProps.status = dbIssue.status;
     }
-    const updated = await issueQueries.updateIssueById(issueId, issueProps);
+    console.log(issueProps);
+    const updated = await issueQueries.updateIssueById(
+      issueId,
+      issueProps,
+      projectId
+    );
 
     console.log(updated);
     return {
@@ -79,9 +85,6 @@ const updateIssue = async (issueId, issueProps) => {
       message: 'Something went wrong!',
     };
   }
-
-  // ha üres nem írom felül, null v undefinded
-  //
 };
 
 const issueService = {

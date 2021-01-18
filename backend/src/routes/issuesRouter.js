@@ -3,7 +3,9 @@ const issueService = require('../services/issueService');
 const hasPermission = require('../middlewares/hasPermissionForProjectMiddleware');
 const router = express.Router({ mergeParams: true });
 
-router.get('/', hasPermission('projectId'), async (req, res) => {
+router.use(hasPermission('projectId'));
+
+router.get('/', async (req, res) => {
   console.log(req.params);
   const data = await issueService.listIssuesOfProject(req.params.projectId);
   console.log(data);
@@ -11,7 +13,7 @@ router.get('/', hasPermission('projectId'), async (req, res) => {
   res.status(data.status).json(data);
 });
 
-router.post('/', hasPermission('projectId'), async (req, res) => {
+router.post('/', async (req, res) => {
   const data = await issueService.addNewIssue(
     req.body.title,
     req.body.status,
@@ -22,17 +24,23 @@ router.post('/', hasPermission('projectId'), async (req, res) => {
 
   res.status(data.status).json(data);
 });
-router.delete('/:id', hasPermission('projectId'), async (req, res) => {
+router.delete('/:id', async (req, res) => {
   const data = await issueService.removeIssue(
     req.params.id,
     req.params.projectId
   );
+
   console.log(data);
 
   res.status(data.status).json(data);
 });
-router.put('/:id', hasPermission('projectId'), async (req, res) => {
-  const data = await issueService.updateIssue(req.params.id, req.body);
+router.put('/:id', async (req, res) => {
+  const data = await issueService.updateIssue(
+    req.params.id,
+    req.body,
+    req.params.projectId
+  );
+
   console.log(data);
 
   res.status(data.status).json(data);
