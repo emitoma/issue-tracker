@@ -9,7 +9,7 @@ const getIssuesByProjectId = async (projectId) => {
   return rows;
 };
 
-const getIssueById = async (issueId, projectId) => {
+const getIssueByIdAndProjectId = async (issueId, projectId) => {
   const db = dbService.getDBPool();
 
   const [
@@ -18,12 +18,12 @@ const getIssueById = async (issueId, projectId) => {
     issueId,
     projectId,
   ]);
-
   return rows[0];
 };
 
 const addNewIssue = async (title, issueStatus = 'todo', projectId) => {
   const db = dbService.getDBPool();
+  console.log('data', title, issueStatus, projectId);
   const [
     rows,
   ] = await db.query(
@@ -59,7 +59,7 @@ const updateIssueById = async (id, issueProps, projectId) => {
 
 const issueQueries = {
   getIssuesByProjectId,
-  getIssueById,
+  getIssueByIdAndProjectId,
   addNewIssue,
   removeIssueById,
   updateIssueById,

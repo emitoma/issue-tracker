@@ -1,4 +1,11 @@
 const issueQueries = require('../queries/issueQueries');
+const issueSchema = require('../validation-schemas/issueSchema');
+const buildResponseFromJoiErrors = require('../utils/buildResponseFromJoiErrors');
+
+const validateIssue = (title, status) => {
+  const data = { title, status };
+  return issueSchema.validateAsync(data);
+};
 
 const listIssuesOfProject = async (projectId) => {
   try {
@@ -17,14 +24,21 @@ const listIssuesOfProject = async (projectId) => {
 };
 
 const addNewIssue = async (title, issueStatus, projectId) => {
+  console.log(issueStatus, 'status');
   try {
-    // TODO move validation to a validator
-    if (title === undefined || title === null) {
+    try {
+      await validateIssue(title, issueStatus);
+    } catch (error) {
+      console.error(error);
+      if (error.isJoi !== true) {
+        throw error;
+      }
       return {
         status: 400,
-        message: 'Cannot save issue without title',
+        errors: buildResponseFromJoiErrors(error),
       };
     }
+
     const newId = await issueQueries.addNewIssue(title, issueStatus, projectId);
     return {
       status: 201,
@@ -58,14 +72,31 @@ const removeIssue = async (issueId, projectId) => {
 
 const updateIssue = async (issueId, issueProps, projectId) => {
   try {
-    const dbIssue = await issueQueries.getIssueById(issueId);
+    const dbIssue = await issueQueries.getIssueByIdAndProjectId(
+      issueId,
+      projectId
+    );
 
-    if (issueProps.title === undefined || issueProps.title === null) {
-      issueProps.title = dbIssue.title;
+    if (!dbIssue) {
+      return {
+        status: 404,
+        message: 'No issue found with given id.',
+      };
     }
-    if (issueProps.status === undefined || issueProps.status === null) {
-      issueProps.status = dbIssue.status;
+
+    try {
+      await validateIssue(issueProps.title, issueProps.status);
+    } catch (error) {
+      console.error(error);
+      if (error.isJoi !== true) {
+        throw error;
+      }
+      return {
+        status: 400,
+        errors: buildResponseFromJoiErrors(error),
+      };
     }
+
     console.log(issueProps);
     const updated = await issueQueries.updateIssueById(
       issueId,
