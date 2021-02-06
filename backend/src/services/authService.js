@@ -34,6 +34,17 @@ const createJWTToken = (payload) => {
   });
 };
 
+const verifyJWTToken = (token) => {
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, config.jwtSecret, (err, decoded) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(decoded);
+    });
+  });
+};
+
 const register = async (email, password, passwordAgain) => {
   try {
     try {
@@ -129,6 +140,7 @@ const login = async (email, password) => {
 const authService = {
   register,
   login,
+  verifyJWTToken,
 };
 
 module.exports = authService;
