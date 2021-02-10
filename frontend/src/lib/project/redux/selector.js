@@ -6,7 +6,7 @@ const getIsLoading = (state) => getState(state).isLoading;
 
 const getProjectIds = (state) => getState(state).ids;
 
-const getProjectById = (state) => getState(state).byId;
+const getProjectById = (state, id) => getState(state).byId[id];
 
 const getProjectErrors = (state) => getState(state).errors;
 

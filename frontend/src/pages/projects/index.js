@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProjectSelectors from '../../lib/project/redux/selector';
 import loadProjects from '../../lib/project/redux/thunks/load-projects';
 import projectActions from '../../lib/project/redux/actions';
+import ProjectListItem from '../../components/projects/ProjectListItem';
 
 const Projects = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,16 @@ const Projects = () => {
     };
   }, []);
 
-  return <div>This is a project page</div>;
+  return (
+    <div>
+      This is a project page
+      <div>
+        {projectIds.map((id) => (
+          <ProjectListItem key={id} id={id} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Projects;
