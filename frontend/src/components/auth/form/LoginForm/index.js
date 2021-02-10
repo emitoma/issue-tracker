@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import login from '../../../../lib/auth/redux/thunks/login';
 import authSelectors from '../../../../lib/auth/redux/selector';
@@ -34,30 +35,34 @@ const LoginForm = () => {
     };
     dispatch(login({ formData, setFormErrors }));
   };
-    console.log("formerr",formErrors)
+  console.log('formerr', formErrors);
+
+  if (isLoggedIn) {
+    return <Redirect to="/projects" />;
+  }
 
   return (
     <Form onSubmit={onSubmit}>
       <div>
-        {errors.map((err, index) =>
-            (<Alert variant='danger' key={index}>
-              {err}
-            </Alert>)
-        )}
+        {errors.map((err, index) => (
+          <Alert variant="danger" key={index}>
+            {err}
+          </Alert>
+        ))}
       </div>
 
-      {isLoggedIn && <Alert variant='success'>Login is successful</Alert>}
+      {isLoggedIn && <Alert variant="success">Login is successful</Alert>}
 
       <Form.Group>
         <Form.Label>Email</Form.Label>
         <Form.Control
-            isInvalid={!!formErrors.email}
-          type='email'
-          placeholder='john@doe.com'
+          isInvalid={!!formErrors.email}
+          type="email"
+          placeholder="john@doe.com"
           onChange={(e) => setEmail(e.target.value)}
         />
         {formErrors.email && (
-          <Form.Control.Feedback type='invalid'>
+          <Form.Control.Feedback type="invalid">
             {formErrors.email}
           </Form.Control.Feedback>
         )}
@@ -67,18 +72,18 @@ const LoginForm = () => {
         <Form.Label>Password</Form.Label>
 
         <Form.Control
-            isInvalid={!!formErrors.password}
-          type='password'
+          isInvalid={!!formErrors.password}
+          type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
         {formErrors.password && (
-          <Form.Control.Feedback type='invalid'>
+          <Form.Control.Feedback type="invalid">
             {formErrors.password}
           </Form.Control.Feedback>
         )}
       </Form.Group>
 
-      <Button variant='primary' block type='submit'>
+      <Button variant="primary" block type="submit">
         Login
       </Button>
     </Form>

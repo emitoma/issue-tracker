@@ -29,11 +29,9 @@ const login = ({ formData, setFormErrors }) => async (dispatch) => {
 
       dispatch(authActions.loginError(json.message ? [json.message] : []));
     } else {
-
+      localStorage.setItem('token', json.token);
       dispatch(authActions.loginSuccess(json.token));
-
     }
-
 
     //const json = await response.json();
     console.log(json);

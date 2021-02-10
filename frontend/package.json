@@ -42,7 +42,8 @@
     ]
   },
   "devDependencies": {
-    "sass": "^1.27.0",
-    "prettier": "^2.2.1"
+    "@types/react-router-dom": "^5.1.7",
+    "prettier": "^2.2.1",
+    "sass": "^1.27.0"
   }
 }

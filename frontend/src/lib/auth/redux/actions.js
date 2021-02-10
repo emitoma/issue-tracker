@@ -1,5 +1,14 @@
 import authActionTypes from './action-types';
 
+const initSuccess = (token) => ({
+  type: authActionTypes.INIT_SUCCESS,
+  payload: { token },
+});
+
+const initError = () => ({
+  type: authActionTypes.INIT_ERROR,
+});
+
 const registerRequest = () => ({
   type: authActionTypes.REGISTER_REQUEST,
 });
@@ -41,6 +50,9 @@ const authActions = {
   loginRequest,
   loginSuccess,
   loginError,
+
+  initSuccess,
+  initError,
 };
 
 export default authActions;

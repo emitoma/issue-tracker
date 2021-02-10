@@ -12,6 +12,8 @@ const getLoginError = (state) => getState(state).loginError;
 
 const getToken = (state) => getState(state).token;
 
+const getIsInitialized = (state) => getState(state).isInitialized
+
 const authSelectors = {
   getState,
   getRegisterErrors,
@@ -20,6 +22,7 @@ const authSelectors = {
   getLoginError,
   getIsLoggedIn,
   getToken,
+  getIsInitialized
 };
 
 export default authSelectors;

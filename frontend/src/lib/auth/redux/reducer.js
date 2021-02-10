@@ -3,6 +3,7 @@ import authActionTypes from './action-types';
 const initialState = {
   isRegistered: false,
   token: null,
+  isInitialized: false,
   isLoggedIn: false,
   registerErrors: [],
   loginErrors: [],
@@ -10,6 +11,22 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
+    case authActionTypes.INIT_SUCCESS:
+      return {
+        ...state,
+        token: action.payload.token,
+        isInitialized: true,
+        isLoggedIn: true,
+      };
+
+    case authActionTypes.INIT_ERROR:
+      return {
+        ...state,
+        token: null,
+        isInitialized: true,
+        isLoggedIn: false,
+      };
+
     case authActionTypes.REGISTER_REQUEST:
       return {
         ...state,
