@@ -1,15 +1,16 @@
-import projectActions from '../actions';
+import issueActions from '../actions';
 import authSelectors from '../../../auth/redux/selector';
 
-const loadProjects = () => async (dispatch, getState) => {
-  dispatch(projectActions.loadProjects());
+const loadIssues = (projectId) => async (dispatch, getState) => {
+  dispatch(issueActions.loadIssuesRequest());
 
   try {
     const state = getState();
     const token = authSelectors.getToken(state);
     console.log(token);
+    // localhost:5000/api/projects/2/issues
     const response = await fetch(
-      process.env.REACT_APP_API_URL + '/api/projects/',
+      process.env.REACT_APP_API_URL + `/api/projects/${projectId}/issues`,
       {
         method: 'GET',
         headers: {
@@ -18,18 +19,18 @@ const loadProjects = () => async (dispatch, getState) => {
         },
       }
     );
+
     const json = await response.json();
-    console.log(json);
 
     if (response.status < 200 || response.status >= 300) {
-      console.log(response.status);
-      dispatch(projectActions.loadProjectError(response.message));
+      dispatch(issueActions.loadIssuesError(response.message));
     } else {
-      dispatch(projectActions.loadProjectsSuccess(json));
+      dispatch(issueActions.loadIssueSuccess(json));
     }
   } catch (error) {
     console.error(error);
-    dispatch(projectActions.loadProjectError('Unknown error'));
+    dispatch(issueActions.loadIssuesError('Unknown error'));
   }
 };
-export default loadProjects;
+
+export default loadIssues;

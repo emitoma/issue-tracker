@@ -7,6 +7,7 @@ import Projects from '../../../pages/projects';
 import authSelectors from '../../../lib/auth/redux/selector';
 import initAuth from '../../../lib/auth/redux/thunks/init-auth';
 import ProtectedRoute from '../../common/ProtectedRoute';
+import IssueList from '../../../pages/projects/[id]';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,9 @@ const App = () => {
           <Login />
         </Route>
 
+        <ProtectedRoute path="/projects/:id">
+          <IssueList />
+        </ProtectedRoute>
         <ProtectedRoute path="/projects">
           <Projects />
         </ProtectedRoute>
