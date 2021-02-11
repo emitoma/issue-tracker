@@ -21,6 +21,7 @@ const Projects = () => {
   }, [isLoading, isInitialized]);
 
   useEffect(() => {
+    // cleanup
     return () => {
       dispatch(projectActions.clearProject());
     };

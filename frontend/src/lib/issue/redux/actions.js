@@ -13,7 +13,7 @@ const loadIssuesError = (errors) => ({
   payload: { errors },
 });
 
-const clearIssue = () => ({
+const clearIssues = () => ({
   type: issueActionTypes.CLEAR,
 });
 
@@ -21,7 +21,7 @@ const issueActions = {
   loadIssuesRequest,
   loadIssueSuccess,
   loadIssuesError,
-  clearIssue,
+  clearIssues,
 };
 
 export default issueActions;

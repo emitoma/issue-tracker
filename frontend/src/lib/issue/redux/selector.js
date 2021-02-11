@@ -4,18 +4,18 @@ const getIsInitialized = (state) => getState(state).isInitialized;
 
 const getIsLoading = (state) => getState(state).isLoading;
 
-const getProjectIds = (state) => getState(state).ids;
+const getIssueIds = (state) => getState(state).ids;
 
-const getProjectById = (state, id) => getState(state).byId[id];
+const getIssueById = (state, id) => getState(state).byId[id];
 
-const getProjectErrors = (state) => getState(state).errors;
+const getIssueErrors = (state) => getState(state).errors;
 
 const issueSelectors = {
   getIsInitialized,
   getIsLoading,
-  getProjectIds,
-  getProjectById,
-  getProjectErrors,
+  getIssueIds,
+  getIssueById,
+  getIssueErrors,
 };
 
 export default issueSelectors;
