@@ -9,11 +9,7 @@ const validateIssue = (title, status) => {
 
 const listIssuesOfProject = async (projectId) => {
   try {
-    const issuesList = await issueQueries.getIssuesByProjectId(projectId);
-    return {
-      status: 200,
-      message: issuesList,
-    };
+    return await issueQueries.getIssuesByProjectId(projectId);
   } catch (err) {
     console.error(err);
     return {
