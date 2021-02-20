@@ -2,6 +2,7 @@ import projectActionTypes from './action-types';
 
 const initialState = {
   isProjectSaved: false,
+  isSaving: false,
   byId: {},
   ids: [],
   isInitialized: false,
@@ -48,7 +49,7 @@ const projectReducer = (state = initialState, action) => {
       return {
         ...state,
         isProjectSaved: false,
-        isLoading: true,
+        isSaving: true,
         errors: '',
       };
 
@@ -56,8 +57,7 @@ const projectReducer = (state = initialState, action) => {
       return {
         ...state,
         isProjectSaved: true,
-        isLoading: false,
-        //TODO: ?? the new project should be listed with the others
+        isSaving: false,
       };
 
     case projectActionTypes.ADD_ERROR:

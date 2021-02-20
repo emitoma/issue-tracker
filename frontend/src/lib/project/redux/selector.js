@@ -10,12 +10,18 @@ const getProjectById = (state, id) => getState(state).byId[id];
 
 const getProjectErrors = (state) => getState(state).errors;
 
+const getIsProjectSaved = (state) => getState(state).isProjectSaved;
+
+const getIsSaving = (state) => getState(state).isSaving;
+
 const projectSelectors = {
   getIsInitialized,
   getIsLoading,
   getProjectIds,
   getProjectById,
   getProjectErrors,
+  getIsProjectSaved,
+  getIsSaving,
 };
 
 export default projectSelectors;
