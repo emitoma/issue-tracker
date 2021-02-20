@@ -22,11 +22,29 @@ const clearProject = () => ({
   type: projectActionTypes.CLEAR,
 });
 
+const addProject = () => ({
+  type: projectActionTypes.ADD_REQUEST,
+});
+
+const addProjectSuccess = () => ({
+  type: projectActionTypes.ADD_SUCCESS,
+});
+
+const addProjectError = (errors) => ({
+  type: projectActionTypes.ADD_ERROR,
+  payload: { errors },
+});
+
 const projectActions = {
   loadProjects,
   loadProjectsSuccess,
   loadProjectError,
+
   clearProject,
+
+  addProject,
+  addProjectSuccess,
+  addProjectError,
 };
 
 export default projectActions;

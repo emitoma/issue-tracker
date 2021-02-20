@@ -1,6 +1,7 @@
 import projectActionTypes from './action-types';
 
 const initialState = {
+  isProjectSaved: false,
   byId: {},
   ids: [],
   isInitialized: false,
@@ -42,6 +43,28 @@ const projectReducer = (state = initialState, action) => {
 
     case projectActionTypes.CLEAR:
       return initialState;
+
+    case projectActionTypes.ADD_REQUEST:
+      return {
+        ...state,
+        isProjectSaved: false,
+        isLoading: true,
+        errors: '',
+      };
+
+    case projectActionTypes.ADD_SUCCESS:
+      return {
+        ...state,
+        isProjectSaved: true,
+        isLoading: false,
+        //TODO: ?? the new project should be listed with the others
+      };
+
+    case projectActionTypes.ADD_ERROR:
+      return {
+        ...state,
+        errors: action.payload.errors,
+      };
 
     default:
       return state;
