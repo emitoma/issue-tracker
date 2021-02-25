@@ -30,9 +30,18 @@ const addProjectSuccess = () => ({
   type: projectActionTypes.ADD_SUCCESS,
 });
 
-const addProjectError = (errors) => ({
+const addProjectError = (generalError, formErrors = {}) => ({
   type: projectActionTypes.ADD_ERROR,
-  payload: { errors },
+  payload: { generalError, formErrors },
+});
+
+const setIsProjectSaved = (isSaved) => ({
+  type: projectActionTypes.SET_IS_PROJECT_SAVED,
+  payload: { isSaved },
+});
+
+const clearErrors = () => ({
+  type: projectActionTypes.CLEAR_ERRORS,
 });
 
 const projectActions = {
@@ -45,6 +54,9 @@ const projectActions = {
   addProject,
   addProjectSuccess,
   addProjectError,
+
+  setIsProjectSaved,
+  clearErrors,
 };
 
 export default projectActions;

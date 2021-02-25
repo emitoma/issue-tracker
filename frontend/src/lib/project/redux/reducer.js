@@ -7,7 +7,10 @@ const initialState = {
   ids: [],
   isInitialized: false,
   isLoading: false,
-  errors: '',
+  errors: {
+    general: '',
+    form: {},
+  },
 };
 
 const projectReducer = (state = initialState, action) => {
@@ -16,7 +19,10 @@ const projectReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-        errors: '',
+        errors: {
+          general: '',
+          form: {},
+        },
       };
 
     case projectActionTypes.LOAD_SUCCESS:
@@ -39,7 +45,10 @@ const projectReducer = (state = initialState, action) => {
     case projectActionTypes.LOAD_ERROR:
       return {
         ...state,
-        errors: action.payload.errors,
+        errors: {
+          ...state.errors,
+          general: action.payload.errors,
+        },
       };
 
     case projectActionTypes.CLEAR:
@@ -50,7 +59,10 @@ const projectReducer = (state = initialState, action) => {
         ...state,
         isProjectSaved: false,
         isSaving: true,
-        errors: '',
+        errors: {
+          general: '',
+          form: {},
+        },
       };
 
     case projectActionTypes.ADD_SUCCESS:
@@ -63,7 +75,24 @@ const projectReducer = (state = initialState, action) => {
     case projectActionTypes.ADD_ERROR:
       return {
         ...state,
-        errors: action.payload.errors,
+        errors: {
+          general: action.payload.generalError,
+          form: action.payload.formErrors,
+        },
+      };
+    case projectActionTypes.SET_IS_PROJECT_SAVED:
+      return {
+        ...state,
+        isProjectSaved: action.payload.isSaved,
+      };
+
+    case projectActionTypes.CLEAR_ERRORS:
+      return {
+        ...state,
+        errors: {
+          general: '',
+          form: {},
+        },
       };
 
     default:

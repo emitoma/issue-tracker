@@ -8,6 +8,9 @@ const projectActionTypes = Object.freeze({
   ADD_REQUEST: 'PROJECT/ADD_REQUEST',
   ADD_SUCCESS: 'PROJECT/ADD_SUCCESS',
   ADD_ERROR: 'PROJECT/ADD_ERROR',
+
+  SET_IS_PROJECT_SAVED: 'PROJECT/SET_IS_PROJECT_SAVED',
+  CLEAR_ERRORS: 'PROJECT/CLEAR_ERRORS',
 });
 
 export default projectActionTypes;
