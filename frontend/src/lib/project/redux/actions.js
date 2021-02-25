@@ -11,11 +11,9 @@ const loadProjectsSuccess = (projects) => ({
   },
 });
 
-const loadProjectError = (errors) => ({
+const loadProjectError = (generalError, formErrors = {}) => ({
   type: projectActionTypes.LOAD_ERROR,
-  payload: {
-    errors,
-  },
+  payload: { generalError, formErrors },
 });
 
 const clearProject = () => ({
@@ -44,6 +42,23 @@ const clearErrors = () => ({
   type: projectActionTypes.CLEAR_ERRORS,
 });
 
+const deleteProject = () => ({
+  type: projectActionTypes.DELETE_REQUEST,
+});
+
+const deleteProjectSuccess = () => ({
+  type: projectActionTypes.DELETE_SUCCESS,
+});
+
+const deleteProjectError = (generalError, formErrors = {}) => ({
+  type: projectActionTypes.DELETE_ERROR,
+  payload: { generalError, formErrors },
+});
+
+const setISProjectDeleted = (isDeleted) => ({
+  type: projectActionTypes.SET_IS_PROJECT_DELETED,
+  payload: { isDeleted },
+});
 const projectActions = {
   loadProjects,
   loadProjectsSuccess,
@@ -57,6 +72,11 @@ const projectActions = {
 
   setIsProjectSaved,
   clearErrors,
+
+  deleteProject,
+  deleteProjectSuccess,
+  deleteProjectError,
+  setISProjectDeleted,
 };
 
 export default projectActions;

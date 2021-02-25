@@ -14,6 +14,10 @@ const getIsProjectSaved = (state) => getState(state).isProjectSaved;
 
 const getIsSaving = (state) => getState(state).isSaving;
 
+const getIsProjectDeleted = (state) => getState(state).isProjectDeleted;
+
+const getIsDeleting = (state) => getState(state).isDeleting;
+
 const projectSelectors = {
   getIsInitialized,
   getIsLoading,
@@ -22,6 +26,8 @@ const projectSelectors = {
   getProjectErrors,
   getIsProjectSaved,
   getIsSaving,
+  getIsProjectDeleted,
+  getIsDeleting,
 };
 
 export default projectSelectors;

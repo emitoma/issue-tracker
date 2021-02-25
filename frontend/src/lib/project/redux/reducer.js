@@ -3,6 +3,8 @@ import projectActionTypes from './action-types';
 const initialState = {
   isProjectSaved: false,
   isSaving: false,
+  isProjectDeleted: false,
+  isDeleting: false,
   byId: {},
   ids: [],
   isInitialized: false,
@@ -80,6 +82,7 @@ const projectReducer = (state = initialState, action) => {
           form: action.payload.formErrors,
         },
       };
+
     case projectActionTypes.SET_IS_PROJECT_SAVED:
       return {
         ...state,
@@ -93,6 +96,39 @@ const projectReducer = (state = initialState, action) => {
           general: '',
           form: {},
         },
+      };
+
+    case projectActionTypes.DELETE_REQUEST:
+      return {
+        ...state,
+        isProjectDeleted: false,
+        isDeleting: true,
+        errors: {
+          general: '',
+          form: {},
+        },
+      };
+
+    case projectActionTypes.DELETE_SUCCESS:
+      return {
+        ...state,
+        isProjectDeleted: true,
+        isDeleting: false,
+      };
+
+    case projectActionTypes.DELETE_ERROR:
+      return {
+        ...state,
+        errors: {
+          general: action.payload.generalError,
+          form: action.payload.formErrors,
+        },
+      };
+
+    case projectActionTypes.SET_IS_PROJECT_DELETED:
+      return {
+        ...state,
+        isProjectDeleted: action.payload.isSaved,
       };
 
     default:
