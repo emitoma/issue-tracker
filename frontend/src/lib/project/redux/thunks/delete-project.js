@@ -20,11 +20,14 @@ const deleteProject = (projectId) => async (dispatch, getState) => {
       }
     );
 
-    const json = await response.json();
+    console.log('response', response.body);
 
+    const json = await response.json();
     if (response.status < 200 || response.status >= 300) {
-      dispatch(projectActions.deleteProjectError(response.message));
+      console.log(json);
+      dispatch(projectActions.deleteProjectError(json.message));
     } else {
+      console.log(json);
       dispatch(projectActions.deleteProjectSuccess());
       dispatch(loadProjects());
     }
