@@ -77,6 +77,7 @@ const projectReducer = (state = initialState, action) => {
     case projectActionTypes.ADD_ERROR:
       return {
         ...state,
+        isSaving: false,
         errors: {
           general: action.payload.generalError,
           form: action.payload.formErrors,
@@ -119,6 +120,7 @@ const projectReducer = (state = initialState, action) => {
     case projectActionTypes.DELETE_ERROR:
       return {
         ...state,
+        isDeleting: false,
         errors: {
           general: action.payload.generalError,
           form: action.payload.formErrors,

@@ -50,10 +50,13 @@ const deleteProjectSuccess = () => ({
   type: projectActionTypes.DELETE_SUCCESS,
 });
 
-const deleteProjectError = (generalError, formErrors = {}) => ({
-  type: projectActionTypes.DELETE_ERROR,
-  payload: { generalError, formErrors },
-});
+const deleteProjectError = (generalError, formErrors = {}) => {
+  console.trace();
+  return {
+    type: projectActionTypes.DELETE_ERROR,
+    payload: { generalError, formErrors },
+  };
+};
 
 const setISProjectDeleted = (isDeleted) => ({
   type: projectActionTypes.SET_IS_PROJECT_DELETED,
