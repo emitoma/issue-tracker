@@ -7,7 +7,7 @@ const AddIssueForm = ({}) => {
   //TODO
   return (
     <Form>
-      {errors.general && <Alert variant="danger">{errors.general}</Alert>}
+      {/*{errors.general && <Alert variant="danger">{errors.general}</Alert>}
 
       <Form.Group>
         <Form.Label>Issue Title</Form.Label>
@@ -16,7 +16,7 @@ const AddIssueForm = ({}) => {
           onChange={(e) => setIssueTitle(e.target.value)}
           value={issueTitle}
         />
-      </Form.Group>
+      </Form.Group>*/}
 
       <Dropdown>
         <Dropdown.Toggle variant="success" id="status">

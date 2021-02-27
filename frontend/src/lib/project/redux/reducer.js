@@ -130,7 +130,7 @@ const projectReducer = (state = initialState, action) => {
     case projectActionTypes.SET_IS_PROJECT_DELETED:
       return {
         ...state,
-        isProjectDeleted: action.payload.isSaved,
+        isProjectDeleted: action.payload.isDeleted,
       };
 
     default:
