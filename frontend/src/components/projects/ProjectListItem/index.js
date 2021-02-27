@@ -19,15 +19,15 @@ const ProjectListItem = ({ id }) => {
   };
 
   return (
-    <>
-      <Link to={`/projects/${id}`} className={css.ProjectListItem}>
+    <div className={css.ProjectListItem}>
+      <Link to={`/projects/${id}`} className={css.projectTitle}>
         {project.name}
       </Link>
-      <p>{project.id}</p>
+      <p>id: {project.id}</p>
       <Button type="button" variant="danger" onClick={onClickHandler}>
         Delete
       </Button>
-    </>
+    </div>
   );
 };
 

@@ -1,0 +1,16 @@
+.Projects {
+  min-width: 600px;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-between;
+
+  .addProject {
+    border: solid black 1px;
+    margin: 5px;
+    width: 250px;
+    height: 150px;
+    padding: 20px;
+  }
+}
