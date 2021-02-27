@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 //
@@ -6,9 +6,12 @@ import loadIssues from '../../../lib/issue/redux/thunks/load-issues';
 import issueSelectors from '../../../lib/issue/redux/selector';
 import issueActions from '../../../lib/issue/redux/actions';
 import IssueListItem from '../../../components/issues/IssueListItem';
+import Button from 'react-bootstrap/Button';
+import AddModal from '../../../components/common/AddModal';
 
 const IssueList = () => {
   const dispatch = useDispatch();
+  const [show, setShow] = useState(false);
 
   const { id } = useParams();
 
@@ -28,14 +31,24 @@ const IssueList = () => {
     };
   }, []);
 
+  const showModal = () => {
+    setShow(true);
+  };
+
   console.log(issueIds);
   return (
-    <div>
-      <h1>Issues</h1>
-      {issueIds.map((id) => (
-        <IssueListItem key={id} id={id} />
-      ))}
-    </div>
+    <>
+      <div>
+        <h1>Issues</h1>
+        <Button variant="primary" type="submit" onClick={showModal}>
+          Add New Issue
+        </Button>
+        {issueIds.map((id) => (
+          <IssueListItem key={id} id={id} />
+        ))}
+      </div>
+      <AddModal title="Issue" show={show} setShow={setShow} />
+    </>
   );
 };
 

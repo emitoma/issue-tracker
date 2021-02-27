@@ -51,8 +51,8 @@ const Projects = () => {
             </Button>
           </div>
         </div>
-        <AddModal title="Project" show={show} setShow={setShow} />
       </div>
+      <AddModal title="Project" show={show} setShow={setShow} />
     </>
   );
 };

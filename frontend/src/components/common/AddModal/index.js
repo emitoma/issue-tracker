@@ -11,6 +11,7 @@ import AddProjectForm from '../../projects/AddProjectForm';
 import projectSelectors from '../../../lib/project/redux/selector';
 import projectActions from '../../../lib/project/redux/actions';
 import projectActionTypes from '../../../lib/project/redux/action-types';
+import AddIssueForm from '../../issues/AddIssueForm';
 
 const AddModal = ({ title, show, setShow }) => {
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ const AddModal = ({ title, show, setShow }) => {
           setDescription={setDescription}
           errors={errors}
         />
+        {/*TODO do the same with add issue form*/}
       </Modal.Body>
 
       <Modal.Footer>
