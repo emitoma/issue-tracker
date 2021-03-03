@@ -1,19 +1,19 @@
 import issueActions from '../actions';
 import authSelectors from '../../../auth/redux/selector';
+import loadIssues from './load-issues';
 
-const loadIssues = (projectId) => async (dispatch, getState) => {
-  dispatch(issueActions.loadIssuesRequest());
+const deleteIssue = (projectId, issueId) => async (dispatch, getState) => {
+  dispatch(issueActions.deleteIssue());
 
   try {
     const state = getState();
     const token = authSelectors.getToken(state);
-    console.log(projectId);
-    console.log(token);
-    // localhost:5000/api/projects/2/issues
+
     const response = await fetch(
-      process.env.REACT_APP_API_URL + `/api/projects/${projectId}/issues`,
+      process.env.REACT_APP_API_URL +
+        `/api/projects/${projectId}/issues/${issueId}`,
       {
-        method: 'GET',
+        method: 'DELETE',
         headers: {
           'content-type': 'application/json',
           Authorization: 'Bearer ' + token,
@@ -24,14 +24,15 @@ const loadIssues = (projectId) => async (dispatch, getState) => {
     const json = await response.json();
 
     if (response.status < 200 || response.status >= 300) {
-      dispatch(issueActions.loadIssuesError(response.message));
+      dispatch(issueActions.deleteIssueError(json.message));
     } else {
-      dispatch(issueActions.loadIssueSuccess(json));
+      dispatch(issueActions.deleteIssueSuccess());
+      dispatch(loadIssues(projectId));
     }
   } catch (error) {
     console.error(error);
-    dispatch(issueActions.loadIssuesError('Unknown error'));
+    dispatch(issueActions.deleteIssueError('Unknown error'));
   }
 };
 
-export default loadIssues;
+export default deleteIssue;

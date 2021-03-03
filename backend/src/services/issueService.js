@@ -55,7 +55,8 @@ const removeIssue = async (issueId, projectId) => {
     console.log(deleted);
 
     return {
-      status: 204,
+      status: 200,
+      message: 'Issue deleted successfully',
     };
   } catch (err) {
     console.error(err);
