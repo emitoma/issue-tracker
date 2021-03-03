@@ -103,8 +103,8 @@ const updateIssue = async (issueId, issueProps, projectId) => {
 
     console.log(updated);
     return {
-      status: 204,
-      message: 'No content.',
+      status: 200,
+      message: 'Issue successfully updated',
     };
   } catch (err) {
     console.error(err);
