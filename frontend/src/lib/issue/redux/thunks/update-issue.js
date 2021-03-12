@@ -38,4 +38,4 @@ const updateIssue = (projectId, issueId, formData) => async (
   }
 };
 
-export default updateIssue();
+export default updateIssue;

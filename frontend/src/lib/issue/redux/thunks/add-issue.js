@@ -8,6 +8,10 @@ const addIssue = (projectId, formData) => async (dispatch, getState) => {
   try {
     const state = getState();
     const token = authSelectors.getToken(state);
+    const postPayload = {
+      title: formData.title,
+      status: formData.issueStatus,
+    };
     const response = await fetch(
       process.env.REACT_APP_API_URL + `/api/projects/${projectId}/issues`,
       {
@@ -16,7 +20,7 @@ const addIssue = (projectId, formData) => async (dispatch, getState) => {
           'content-type': 'application/json',
           Authorization: 'Bearer ' + token,
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(postPayload),
       }
     );
 
@@ -34,4 +38,4 @@ const addIssue = (projectId, formData) => async (dispatch, getState) => {
   }
 };
 
-export default addIssue();
+export default addIssue;

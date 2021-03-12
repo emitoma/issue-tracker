@@ -7,13 +7,13 @@ import issueSelectors from '../../../lib/issue/redux/selector';
 import issueActions from '../../../lib/issue/redux/actions';
 import IssueListItem from '../../../components/issues/IssueListItem';
 import Button from 'react-bootstrap/Button';
-import AddModal from '../../../components/common/AddModal';
+import IssueModal from '../../../components/common/Modal/IssueModal';
 
 const IssueList = () => {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
 
-  const { id } = useParams();
+  const { id: projectId } = useParams();
 
   const isInitialized = useSelector(issueSelectors.getIsInitialized);
   const isLoading = useSelector(issueSelectors.getIsLoading);
@@ -21,9 +21,9 @@ const IssueList = () => {
 
   useEffect(() => {
     if (!isLoading && !isInitialized) {
-      dispatch(loadIssues(id));
+      dispatch(loadIssues(projectId));
     }
-  }, [isLoading, isInitialized, id]);
+  }, [isLoading, isInitialized, projectId]);
 
   useEffect(() => {
     return () => {
@@ -35,7 +35,6 @@ const IssueList = () => {
     setShow(true);
   };
 
-  console.log(issueIds);
   return (
     <>
       <div>
@@ -47,7 +46,7 @@ const IssueList = () => {
           <IssueListItem key={id} id={id} />
         ))}
       </div>
-      <AddModal title="Issue" show={show} setShow={setShow} />
+      <IssueModal show={show} setShow={setShow} projectId={projectId} />
     </>
   );
 };

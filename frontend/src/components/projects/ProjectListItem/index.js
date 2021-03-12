@@ -20,7 +20,7 @@ const ProjectListItem = ({ id }) => {
 
   return (
     <div className={css.ProjectListItem}>
-      <Link to={`/projects/${id}`} className={css.projectTitle}>
+      <Link to={`/projects/${id}`} className={css['projectTitle']}>
         {project.name}
       </Link>
       <p>id: {project.id}</p>

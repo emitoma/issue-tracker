@@ -1,19 +1,16 @@
 import React, { memo, useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Modal from 'react-bootstrap/Modal';
-import ReactDOM from 'react-dom';
-
-import { useDispatch, useSelector } from 'react-redux';
-import addProject from '../../../lib/project/redux/thunks/add-project';
-
 import Button from 'react-bootstrap/Button';
-import AddProjectForm from '../../projects/AddProjectForm';
-import projectSelectors from '../../../lib/project/redux/selector';
-import projectActions from '../../../lib/project/redux/actions';
-import projectActionTypes from '../../../lib/project/redux/action-types';
-import AddIssueForm from '../../issues/AddIssueForm';
 
-const AddModal = ({ title, show, setShow }) => {
+import addProject from '../../../../lib/project/redux/thunks/add-project';
+import AddProjectForm from '../../../projects/AddProjectForm';
+import projectSelectors from '../../../../lib/project/redux/selector';
+import projectActions from '../../../../lib/project/redux/actions';
+
+const ProjectModal = ({ show, setShow }) => {
   const dispatch = useDispatch();
 
   const errors = useSelector(projectSelectors.getProjectErrors);
@@ -49,7 +46,7 @@ const AddModal = ({ title, show, setShow }) => {
 
   return ReactDOM.createPortal(
     <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton>Add new {title}</Modal.Header>
+      <Modal.Header closeButton>Add new Project</Modal.Header>
       <Modal.Body>
         <AddProjectForm
           name={name}
@@ -58,7 +55,6 @@ const AddModal = ({ title, show, setShow }) => {
           setDescription={setDescription}
           errors={errors}
         />
-        {/*TODO do the same with add issue form*/}
       </Modal.Body>
 
       <Modal.Footer>
@@ -74,4 +70,4 @@ const AddModal = ({ title, show, setShow }) => {
   );
 };
 
-export default memo(AddModal);
+export default memo(ProjectModal);

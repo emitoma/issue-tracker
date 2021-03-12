@@ -7,8 +7,11 @@ import loadProjects from '../../lib/project/redux/thunks/load-projects';
 
 import css from './style.module.scss';
 import ProjectListItem from '../../components/projects/ProjectListItem';
-import AddModal from '../../components/common/AddModal';
+import ProjectModal from '../../components/common/Modal/ProjectModal';
+
 import Button from 'react-bootstrap/Button';
+
+import Sidebar from '../../components/sidebar';
 
 const Projects = () => {
   const dispatch = useDispatch();
@@ -39,7 +42,10 @@ const Projects = () => {
 
   return (
     <>
-      <div>
+      <div className={css['Page']}>
+        {/*
+        <Sidebar className={css['Nav']} />
+*/}
         <h1>My Projects</h1>
         <div className={css.Projects}>
           {projectIds.map((id) => (
@@ -52,7 +58,7 @@ const Projects = () => {
           </div>
         </div>
       </div>
-      <AddModal title="Project" show={show} setShow={setShow} />
+      <ProjectModal show={show} setShow={setShow} />
     </>
   );
 };
