@@ -42,20 +42,23 @@ const Projects = () => {
 
   return (
     <>
-      <div className={css['Page']}>
+      <main className={css['Project']}>
         <Navbar />
-        <h1>My Projects</h1>
-        <div className={css.Projects}>
-          {projectIds.map((id) => (
-            <ProjectListItem key={id} id={id} />
-          ))}
-          <div className={css.addProject}>
+
+        <div className={css['Project-list']}>
+          <div className={css['Project-add']}>
+            <h2 className={css['title']}>My Projects</h2>
+
             <Button variant="primary" type="submit" onClick={showModal}>
               Add New Project
             </Button>
           </div>
+
+          {projectIds.map((id) => (
+            <ProjectListItem key={id} id={id} />
+          ))}
         </div>
-      </div>
+      </main>
       <ProjectModal show={show} setShow={setShow} />
     </>
   );

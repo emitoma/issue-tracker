@@ -1,10 +1,35 @@
 .IssueListItem {
   border: solid black 1px;
-  width: 600px;
-  height: 50px;
-  margin: 10px;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
+  width: 90%;
+  min-height: 50px;
+  padding: 0 10px;
+  margin: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 2%;
+  align-items: center;
+
+  h3 {
+    font-size: 24px;
+    margin-right: auto;
+  }
+
+  .status {
+    margin: 0;
+    text-align: center;
+    font-size: 18px;
+    text-transform: capitalize;
+  }
+
+  .actions {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min-content;
+    column-gap: 10px;
+    justify-content: end;
+
+    .action {
+      display: block;
+    }
+  }
 }

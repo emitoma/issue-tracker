@@ -8,6 +8,9 @@ import issueActions from '../../../lib/issue/redux/actions';
 import IssueListItem from '../../../components/issues/IssueListItem';
 import Button from 'react-bootstrap/Button';
 import IssueModal from '../../../components/common/Modal/IssueModal';
+import Navbar from '../../../components/sidebar';
+//
+import css from './styel.module.scss';
 
 const IssueList = () => {
   const dispatch = useDispatch();
@@ -37,15 +40,28 @@ const IssueList = () => {
 
   return (
     <>
-      <div>
-        <h1>Issues</h1>
-        <Button variant="primary" type="submit" onClick={showModal}>
-          Add New Issue
-        </Button>
-        {issueIds.map((id) => (
-          <IssueListItem key={id} issueId={id} projectId={projectId} />
-        ))}
-      </div>
+      <main className={css['Issues-page']}>
+        <Navbar className={css['side-nav']} />
+
+        <div className={css['wrapper']}>
+          <h2>Issues</h2>
+          <Button
+            size="lg"
+            block
+            className={css['Issues-button']}
+            variant="primary"
+            type="submit"
+            onClick={showModal}
+          >
+            Add New Issue
+          </Button>
+          <div className={css['Issues-list']}>
+            {issueIds.map((id) => (
+              <IssueListItem key={id} issueId={id} projectId={projectId} />
+            ))}
+          </div>
+        </div>
+      </main>
       <IssueModal show={show} setShow={setShow} projectId={projectId} />
     </>
   );

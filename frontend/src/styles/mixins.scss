@@ -1,3 +1,9 @@
 @mixin borderRadius {
   border-radius: 15px;
 }
+
+@mixin pageLayout {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: [first-start] 350px [first-end second-start] auto [second-end];
+}

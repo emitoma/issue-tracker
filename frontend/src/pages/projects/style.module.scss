@@ -1,30 +1,19 @@
 @import '../../styles/variables';
+@import '../../styles/mixins';
 
-.Page {
-  height: 100vh;
-  display: flex;
+.Project {
+  @include pageLayout();
 
-  .Nav {
-    background: $color_blue;
-    color: $color_white;
-    max-width: 300px;
-  }
+  &-list {
+    grid-column-start: second-start;
+    grid-column-end: second-end;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    place-items: center;
 
-  .Projects {
-    min-width: 600px;
-    max-height: 100%;
-    height: 600px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-content: space-between;
-
-    .addProject {
-      border: solid $color_black 1px;
-      margin: 5px;
-      width: 250px;
-      height: 150px;
-      padding: 20px;
+    h2 {
+      margin-bottom: 40px;
     }
   }
 }

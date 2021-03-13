@@ -1,13 +1,14 @@
 import React, { memo } from 'react';
-import classNames from 'classnames';
-import NavbarLink from './Navbar-link';
-import css from './style.module.scss';
+import { Redirect, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import classNames from 'classnames';
+
 import authSelectors from '../../lib/auth/redux/selector';
 import authActions from '../../lib/auth/redux/actions';
 import projectActions from '../../lib/project/redux/actions';
 import issueActions from '../../lib/issue/redux/actions';
-import { Redirect } from 'react-router-dom';
+
+import css from './style.module.scss';
 
 const Navbar = ({ className }) => {
   const dispatch = useDispatch();
@@ -31,11 +32,27 @@ const Navbar = ({ className }) => {
     <nav className={classList}>
       <h1 className={css['Nav-title']}>Issue Tracker</h1>
       <h2 className={css['Nav-greeting']}>Welcome back!</h2>
-      <div>
-        {links.map((link) => (
-          <NavbarLink page={link} />
-        ))}
-      </div>
+      <ul className={css['Nav-list']}>
+        <li>
+          <NavLink to="/projects/5" className={css['Nav-list-link']}>
+            Inbox
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/projects"
+            className={css['Nav-list-link']}
+            activeClassName={css['active']}
+          >
+            Projects
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/projects" className={css['Nav-list-link']}>
+            Settings
+          </NavLink>
+        </li>
+      </ul>
       <h2 className={css['logout']} onClick={handleClick}>
         Log Out
       </h2>

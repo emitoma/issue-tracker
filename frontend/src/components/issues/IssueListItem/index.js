@@ -26,15 +26,31 @@ const IssueListItem = ({ issueId, projectId }) => {
   };
 
   return (
-    <div className={css.IssueListItem}>
+    <div className={css['IssueListItem']}>
       <h3>{issue.title}</h3>
-      <p>{issue.status}</p>
-      <Button type="button" variant="warning" onClick={showModal}>
-        Edit
-      </Button>
-      <Button type="button" variant="danger" onClick={handleDelete}>
-        Delete
-      </Button>
+      <p className={css['status']}>{issue.status}</p>
+
+      <div className={css['actions']}>
+        <Button
+          className={css['action']}
+          type="button"
+          variant="warning"
+          onClick={showModal}
+          size="sm"
+        >
+          Edit
+        </Button>
+        <Button
+          className={css['action']}
+          type="button"
+          variant="danger"
+          onClick={handleDelete}
+          size="sm"
+        >
+          Delete
+        </Button>
+      </div>
+
       <IssueModal
         show={show}
         setShow={setShow}

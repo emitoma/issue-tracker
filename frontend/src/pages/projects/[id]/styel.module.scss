@@ -1,0 +1,26 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.Issues-page {
+  @include pageLayout();
+
+  .wrapper {
+    padding: 20px;
+    grid-column-start: second-start;
+    grid-column-end: second-end;
+
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      margin-bottom: 40px;
+    }
+    .Issues-button {
+      max-width: 30%;
+    }
+    .Issues-list {
+      width: 100%;
+      padding: 5%;
+    }
+  }
+}
