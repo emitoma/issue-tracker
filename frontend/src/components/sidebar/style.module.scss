@@ -1,0 +1,29 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.Nav {
+  background: $color_blue;
+  color: $color_white;
+  padding: 30px;
+  height: 100vh;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+
+  &-title {
+    font-size: 32px;
+    margin: 50px 0 20px;
+  }
+
+  &-greeting {
+    font-weight: 400;
+    font-size: 22px;
+    margin-bottom: 60px;
+  }
+
+  .logout {
+    margin-top: auto;
+    font-size: 16px;
+    cursor: pointer;
+  }
+}

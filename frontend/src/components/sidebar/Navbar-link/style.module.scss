@@ -1,0 +1,21 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins.scss';
+
+.Nav-link {
+  font-size: 18px;
+  font-weight: 300;
+  width: 200px;
+  height: 40px;
+  color: $color_white;
+  text-decoration: none;
+  display: block;
+  @include borderRadius;
+  margin-bottom: 44px;
+  padding: 8px;
+
+  &:hover {
+    color: $color_white;
+    text-decoration: none;
+    background: $color_dark_blue;
+  }
+}

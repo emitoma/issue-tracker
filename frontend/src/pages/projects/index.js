@@ -11,7 +11,7 @@ import ProjectModal from '../../components/common/Modal/ProjectModal';
 
 import Button from 'react-bootstrap/Button';
 
-import Sidebar from '../../components/sidebar';
+import Navbar from '../../components/sidebar';
 
 const Projects = () => {
   const dispatch = useDispatch();
@@ -43,9 +43,7 @@ const Projects = () => {
   return (
     <>
       <div className={css['Page']}>
-        {/*
-        <Sidebar className={css['Nav']} />
-*/}
+        <Navbar />
         <h1>My Projects</h1>
         <div className={css.Projects}>
           {projectIds.map((id) => (

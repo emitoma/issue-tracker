@@ -1,5 +1,5 @@
 import issueActionTypes from './action-types';
-import projectActionTypes from '../../project/redux/action-types';
+
 const loadIssuesRequest = () => ({
   type: issueActionTypes.LOAD_REQUEST,
 });

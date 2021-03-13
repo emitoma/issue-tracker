@@ -29,11 +29,12 @@ const deleteProject = (projectId) => async (dispatch, getState) => {
     } else {
       console.log(json);
       dispatch(projectActions.deleteProjectSuccess());
-      dispatch(loadProjects());
     }
   } catch (error) {
     console.error(error);
     dispatch(projectActions.deleteProjectError('Unknown error'));
+  } finally {
+    dispatch(loadProjects());
   }
 };
 

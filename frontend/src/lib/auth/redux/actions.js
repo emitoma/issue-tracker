@@ -40,12 +40,22 @@ const loginError = (errors) => ({
   payload: { errors },
 });
 
+const setIsLoggedIn = (isLoggedIn) => ({
+  type: authActionTypes.LOGIN_SET_IS_LOGGED_IN,
+  payload: { isLoggedIn },
+});
+
+const clearAuth = () => ({
+  type: authActionTypes.CLEAR_AUTH,
+});
+
 const authActions = {
   registerRequest,
   registerSuccess,
   registerError,
 
   clearErrors,
+  clearAuth,
 
   loginRequest,
   loginSuccess,
@@ -53,6 +63,8 @@ const authActions = {
 
   initSuccess,
   initError,
+
+  setIsLoggedIn,
 };
 
 export default authActions;

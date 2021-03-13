@@ -161,6 +161,7 @@ const issueReducer = (state = initialState, action) => {
           form: action.payload.formErrors,
         },
       };
+
     case issueActionTypes.SET_IS_ISSUE_EDITED:
       return {
         ...state,

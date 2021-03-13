@@ -1,10 +1,12 @@
+@import '../../styles/variables';
+
 .Page {
   height: 100vh;
   display: flex;
 
   .Nav {
-    background: #1e5dff;
-    color: white;
+    background: $color_blue;
+    color: $color_white;
     max-width: 300px;
   }
 
@@ -18,7 +20,7 @@
     align-content: space-between;
 
     .addProject {
-      border: solid black 1px;
+      border: solid $color_black 1px;
       margin: 5px;
       width: 250px;
       height: 150px;
