@@ -8,6 +8,7 @@ import authSelectors from '../../../lib/auth/redux/selector';
 import initAuth from '../../../lib/auth/redux/thunks/init-auth';
 import ProtectedRoute from '../../common/ProtectedRoute';
 import IssueList from '../../../pages/projects/[id]';
+import IndexPage from '../../../pages';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,9 @@ const App = () => {
   return (
     <Router>
       <Switch>
+        <Route exact path="/">
+          <IndexPage />
+        </Route>
         <Route path={['/auth/login', '/auth/register']}>
           <Login />
         </Route>

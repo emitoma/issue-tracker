@@ -35,8 +35,7 @@ const AddIssueForm = ({
         onSelect={handleSelect}
       >
         <Dropdown.Item eventKey="todo">Todo</Dropdown.Item>
-        <Dropdown.Item eventKey="in progress">In progress</Dropdown.Item>
-        {/*TODO change "in progress" to "in_progress" on backend*/}
+        <Dropdown.Item eventKey="in_progress">In progress</Dropdown.Item>
         <Dropdown.Item eventKey="done">Done</Dropdown.Item>
       </DropdownButton>
       <h4>Status: {issueStatus}</h4>
