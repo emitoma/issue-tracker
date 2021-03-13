@@ -43,7 +43,7 @@ const IssueList = () => {
           Add New Issue
         </Button>
         {issueIds.map((id) => (
-          <IssueListItem key={id} id={id} />
+          <IssueListItem key={id} issueId={id} projectId={projectId} />
         ))}
       </div>
       <IssueModal show={show} setShow={setShow} projectId={projectId} />

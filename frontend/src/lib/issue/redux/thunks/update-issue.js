@@ -11,6 +11,10 @@ const updateIssue = (projectId, issueId, formData) => async (
   try {
     const state = getState();
     const token = authSelectors.getToken(state);
+    const putPayload = {
+      title: formData.title,
+      status: formData.issueStatus,
+    };
     const response = await fetch(
       process.env.REACT_APP_API_URL +
         `/api/projects/${projectId}/issues/${issueId}`,
@@ -20,21 +24,22 @@ const updateIssue = (projectId, issueId, formData) => async (
           'content-type': 'application/json',
           Authorization: 'Bearer ' + token,
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(putPayload),
       }
     );
 
     const json = await response.json();
 
     if (response.status < 200 || response.status >= 300) {
-      dispatch(issueActions.editIssueSuccess(json.message));
+      dispatch(issueActions.editIssueError(json.message));
     } else {
       dispatch(issueActions.editIssueSuccess());
-      dispatch(loadIssues(projectId));
     }
   } catch (e) {
     console.error(e);
     dispatch(issueActions.editIssueError('Unknown Error'));
+  } finally {
+    dispatch(loadIssues(projectId));
   }
 };
 

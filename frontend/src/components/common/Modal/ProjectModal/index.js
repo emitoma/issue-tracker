@@ -9,6 +9,7 @@ import addProject from '../../../../lib/project/redux/thunks/add-project';
 import AddProjectForm from '../../../projects/AddProjectForm';
 import projectSelectors from '../../../../lib/project/redux/selector';
 import projectActions from '../../../../lib/project/redux/actions';
+import Form from 'react-bootstrap/Form';
 
 const ProjectModal = ({ show, setShow }) => {
   const dispatch = useDispatch();
@@ -21,7 +22,9 @@ const ProjectModal = ({ show, setShow }) => {
 
   const handleClose = () => setShow(false);
 
-  const saveProject = () => {
+  const saveProject = (e) => {
+    e.preventDefault();
+
     const formData = {
       name,
       description,
@@ -46,25 +49,27 @@ const ProjectModal = ({ show, setShow }) => {
 
   return ReactDOM.createPortal(
     <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton>Add new Project</Modal.Header>
-      <Modal.Body>
-        <AddProjectForm
-          name={name}
-          setName={setName}
-          description={description}
-          setDescription={setDescription}
-          errors={errors}
-        />
-      </Modal.Body>
+      <Form onSubmit={saveProject}>
+        <Modal.Header closeButton>Add new Project</Modal.Header>
+        <Modal.Body>
+          <AddProjectForm
+            name={name}
+            setName={setName}
+            description={description}
+            setDescription={setDescription}
+            errors={errors}
+          />
+        </Modal.Body>
 
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
-        <Button variant="primary" onClick={saveProject}>
-          Save
-        </Button>
-      </Modal.Footer>
+        <Modal.Footer>
+          <Button type="button" variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button type="submit" variant="primary">
+            Save
+          </Button>
+        </Modal.Footer>
+      </Form>
     </Modal>,
     document.getElementById('root')
   );

@@ -1,8 +1,9 @@
 import React, { memo } from 'react';
+
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { DropdownButton } from 'react-bootstrap';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 const AddIssueForm = ({
   title,
@@ -15,7 +16,7 @@ const AddIssueForm = ({
     setIssueStatus(e);
   };
   return (
-    <Form>
+    <>
       {errors.general && <Alert variant="danger">{errors.general}</Alert>}
 
       <Form.Group>
@@ -38,7 +39,8 @@ const AddIssueForm = ({
         {/*TODO change "in progress" to "in_progress" on backend*/}
         <Dropdown.Item eventKey="done">Done</Dropdown.Item>
       </DropdownButton>
-    </Form>
+      <h4>Status: {issueStatus}</h4>
+    </>
   );
 };
 

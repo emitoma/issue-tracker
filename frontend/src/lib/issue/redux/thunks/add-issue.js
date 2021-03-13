@@ -30,11 +30,12 @@ const addIssue = (projectId, formData) => async (dispatch, getState) => {
       dispatch(issueActions.addIssueError(json.message));
     } else {
       dispatch(issueActions.addIssueSuccess());
-      dispatch(loadIssues(projectId));
     }
   } catch (e) {
     console.error(e);
     dispatch(issueActions.addIssueError('Unknown Error'));
+  } finally {
+    dispatch(loadIssues(projectId));
   }
 };
 

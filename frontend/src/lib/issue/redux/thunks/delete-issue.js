@@ -27,11 +27,12 @@ const deleteIssue = (projectId, issueId) => async (dispatch, getState) => {
       dispatch(issueActions.deleteIssueError(json.message));
     } else {
       dispatch(issueActions.deleteIssueSuccess());
-      dispatch(loadIssues(projectId));
     }
   } catch (error) {
     console.error(error);
     dispatch(issueActions.deleteIssueError('Unknown error'));
+  } finally {
+    dispatch(loadIssues(projectId));
   }
 };
 

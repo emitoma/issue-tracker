@@ -8,56 +8,93 @@ import { useDispatch, useSelector } from 'react-redux';
 import AddIssueForm from '../../../issues/AddIssueForm';
 import issueSelectors from '../../../../lib/issue/redux/selector';
 import addIssue from '../../../../lib/issue/redux/thunks/add-issue';
+import issueActions from '../../../../lib/issue/redux/actions';
+import updateIssue from '../../../../lib/issue/redux/thunks/update-issue';
+import Form from 'react-bootstrap/Form';
 
-const IssueModal = ({ projectId, show, setShow }) => {
+const IssueModal = ({ projectId, show, setShow, issueId = null }) => {
   const dispatch = useDispatch();
+
+  console.log('issueID', issueId);
+  const issue = useSelector((state) => {
+    if (!issueId) {
+      return null;
+    }
+
+    return issueSelectors.getIssueById(state, issueId);
+  });
+  console.log('issue', issue);
 
   const errors = useSelector(issueSelectors.getIssueErrors);
   const isSaved = useSelector(issueSelectors.getIsIssueSaved);
+  const isEdited = useSelector(issueSelectors.getIsIssueEdited);
 
-  const [title, setTitle] = useState('');
-  const [issueStatus, setIssueStatus] = useState('');
+  const [title, setTitle] = useState(issue ? issue.title : '');
+  const [issueStatus, setIssueStatus] = useState(issue ? issue.status : 'todo');
 
-  const saveIssue = () => {
-    console.log(issueStatus, projectId);
+  const handleClose = () => setShow(false);
+
+  const saveIssue = (e) => {
+    e.preventDefault();
     const formData = {
       title,
       issueStatus,
     };
-    dispatch(addIssue(projectId, formData));
+
+    if (issue) {
+      console.log(projectId, issueId, formData);
+      dispatch(updateIssue(projectId, issueId, formData));
+    } else {
+      dispatch(addIssue(projectId, formData));
+    }
   };
 
   useEffect(() => {
-    if (isSaved) {
+    if (isSaved || isEdited) {
       setShow(false);
     }
-  }, [isSaved]);
+  }, [isSaved, isEdited]);
 
-  const handleClose = () => setShow(false);
+  useEffect(() => {
+    if (!show) {
+      setTitle('');
+      setIssueStatus('');
+      dispatch(issueActions.setIsIssueSaved(false));
+      dispatch(issueActions.clearErrors());
+    }
+  }, [show]);
+
+  useEffect(() => {
+    setTitle(issue ? issue.title : '');
+    setIssueStatus(issue ? issue.status : 'todo');
+  }, [issue]);
 
   return ReactDOM.createPortal(
     <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton>Add new</Modal.Header>
-      <Modal.Body>
-        <AddIssueForm
-          title={title}
-          setTitle={setTitle}
-          issueStatus={issueStatus}
-          setIssueStatus={setIssueStatus}
-          errors={errors}
-        />
-      </Modal.Body>
+      <Form onSubmit={saveIssue}>
+        <Modal.Header closeButton>Add new</Modal.Header>
+        <Modal.Body>
+          <AddIssueForm
+            title={title}
+            setTitle={setTitle}
+            issueStatus={issueStatus}
+            setIssueStatus={setIssueStatus}
+            errors={errors}
+          />
+        </Modal.Body>
 
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
-        <Button variant="primary" onClick={saveIssue}>
-          Save
-        </Button>
-      </Modal.Footer>
+        <Modal.Footer>
+          <Button type="button" variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button type="submit" variant="primary">
+            Save
+          </Button>
+        </Modal.Footer>
+      </Form>
     </Modal>,
     document.getElementById('root')
   );
 };
+
 export default memo(IssueModal);

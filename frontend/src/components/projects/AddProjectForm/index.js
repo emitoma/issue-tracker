@@ -12,7 +12,7 @@ const AddProjectForm = ({
 }) => {
   console.log(errors);
   return (
-    <Form>
+    <>
       {errors.general && <Alert variant="danger">{errors.general}</Alert>}
       <Form.Group>
         <Form.Label>Project Name</Form.Label>
@@ -31,7 +31,7 @@ const AddProjectForm = ({
           value={description}
         />
       </Form.Group>
-    </Form>
+    </>
   );
 };
 export default memo(AddProjectForm);
