@@ -1,0 +1,54 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.Nav {
+  background: $color_blue;
+  color: $color_white;
+  padding: 30px;
+  height: 100vh;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+
+  &-title {
+    font-size: 32px;
+    margin: 50px 0 20px;
+  }
+
+  &-greeting {
+    font-weight: 400;
+    font-size: 22px;
+    margin-bottom: 60px;
+  }
+
+  &-list {
+    list-style: none;
+
+    &-link {
+      @include border;
+      border: none;
+      font-size: 18px;
+      font-weight: 300;
+      width: 200px;
+      height: 40px;
+      color: $color_white;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 44px;
+      padding: 8px;
+
+      &:hover,
+      .active {
+        color: $color_white;
+        text-decoration: none;
+        background: $color_dark_blue;
+      }
+    }
+  }
+
+  .logout {
+    margin-top: auto;
+    font-size: 16px;
+    cursor: pointer;
+  }
+}

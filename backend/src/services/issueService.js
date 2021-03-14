@@ -9,11 +9,7 @@ const validateIssue = (title, status) => {
 
 const listIssuesOfProject = async (projectId) => {
   try {
-    const issuesList = await issueQueries.getIssuesByProjectId(projectId);
-    return {
-      status: 200,
-      message: issuesList,
-    };
+    return await issueQueries.getIssuesByProjectId(projectId);
   } catch (err) {
     console.error(err);
     return {
@@ -59,7 +55,8 @@ const removeIssue = async (issueId, projectId) => {
     console.log(deleted);
 
     return {
-      status: 204,
+      status: 200,
+      message: 'Issue deleted successfully',
     };
   } catch (err) {
     console.error(err);
@@ -106,8 +103,8 @@ const updateIssue = async (issueId, issueProps, projectId) => {
 
     console.log(updated);
     return {
-      status: 204,
-      message: 'No content.',
+      status: 200,
+      message: 'Issue successfully updated',
     };
   } catch (err) {
     console.error(err);

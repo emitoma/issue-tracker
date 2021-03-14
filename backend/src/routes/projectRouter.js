@@ -28,7 +28,9 @@ router.delete('/:id', async (req, res) => {
     req.params.id,
     req.locals.user.id
   );
-  res.send(data);
+  console.log(data);
+
+  res.status(data.status).json(data);
 });
 
 module.exports = router;

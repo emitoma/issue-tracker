@@ -1,0 +1,20 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.Project {
+  @include pageLayout();
+
+  &-list {
+    margin: 5%;
+    grid-column-start: second-start;
+    grid-column-end: second-end;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    place-items: center;
+
+    h2 {
+      margin-bottom: 40px;
+    }
+  }
+}

@@ -9,8 +9,11 @@ router.get('/', async (req, res) => {
   console.log(req.params);
   const data = await issueService.listIssuesOfProject(req.params.projectId);
   console.log(data);
-
-  res.status(data.status).json(data);
+  if (data.status === 500) {
+    res.status(data.status).json(data);
+  } else {
+    res.status(200).json(data);
+  }
 });
 
 router.post('/', async (req, res) => {

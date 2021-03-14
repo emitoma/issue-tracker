@@ -1,5 +1,14 @@
 import authActionTypes from './action-types';
 
+const initSuccess = (token) => ({
+  type: authActionTypes.INIT_SUCCESS,
+  payload: { token },
+});
+
+const initError = () => ({
+  type: authActionTypes.INIT_ERROR,
+});
+
 const registerRequest = () => ({
   type: authActionTypes.REGISTER_REQUEST,
 });
@@ -31,16 +40,35 @@ const loginError = (errors) => ({
   payload: { errors },
 });
 
+const setIsLoggedIn = (isLoggedIn) => ({
+  type: authActionTypes.LOGIN_SET_IS_LOGGED_IN,
+  payload: { isLoggedIn },
+});
+
+const logout = () => {
+  localStorage.removeItem('token');
+
+  return {
+    type: authActionTypes.LOGOUT,
+  };
+};
+
 const authActions = {
   registerRequest,
   registerSuccess,
   registerError,
 
   clearErrors,
+  logout,
 
   loginRequest,
   loginSuccess,
   loginError,
+
+  initSuccess,
+  initError,
+
+  setIsLoggedIn,
 };
 
 export default authActions;

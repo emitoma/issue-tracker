@@ -1,6 +1,8 @@
+@import '../../../styles/variables';
+
 .Login {
-  background-color: #1e5dff;
-  height: 100%;
+  background-color: $color_blue;
+  height: 100vh;
 
   .title {
     font-family: 'Leckerli One', cursive;
@@ -11,20 +13,20 @@
     margin: 0 0 100px;
     padding-top: 200px;
 
-    background-color: #002a96;
+    background-color: $color_dark_blue;
     color: transparent;
-    text-shadow: 2px 2px 3px #0047ff80;
+    text-shadow: 2px 2px 3px $color_darker_blue;
     -webkit-background-clip: text;
     -moz-background-clip: text;
     background-clip: text;
   }
 
   .form-container {
-    background-color: #ffffff;
+    background-color: $color_white;
     width: 470px;
     max-width: 100%;
     padding: 25px;
-    border-radius: 8px;
+    border-radius: px;
     margin: 0 auto;
   }
 }

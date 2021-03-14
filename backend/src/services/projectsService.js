@@ -36,7 +36,39 @@ const addNewProject = async (name, description, ownerId) => {
 };
 
 const deleteProject = async (projectId, ownerId) => {
-  return await projectQueries.removeProjectById(projectId, ownerId);
+  if (!projectId) {
+    return {
+      status: 400,
+      message: 'Could not find project',
+    };
+  }
+  try {
+    const dbResponse = await projectQueries.removeProjectById(
+      projectId,
+      ownerId
+    );
+    console.log('dbResp', dbResponse.affectedRows);
+
+    if (dbResponse.affectedRows === 0) {
+      return {
+        status: 500,
+        message: 'No project found',
+      };
+    }
+
+    if (dbResponse.affectedRows > 0) {
+      return {
+        status: 200,
+        message: 'Project deleted successfully',
+      };
+    }
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: 'Something went wrong',
+    };
+  }
 };
 
 const projectService = {
