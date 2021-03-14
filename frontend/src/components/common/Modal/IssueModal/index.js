@@ -71,7 +71,9 @@ const IssueModal = ({ projectId, show, setShow, issueId = null }) => {
   return ReactDOM.createPortal(
     <Modal show={show} onHide={handleClose}>
       <Form onSubmit={saveIssue}>
-        <Modal.Header closeButton>Add new</Modal.Header>
+        <Modal.Header closeButton>
+          {!issue ? 'Add New Issue' : 'Edit issue'}
+        </Modal.Header>
         <Modal.Body>
           <AddIssueForm
             title={title}

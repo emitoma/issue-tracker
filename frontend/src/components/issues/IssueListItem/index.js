@@ -8,6 +8,8 @@ import deleteIssue from '../../../lib/issue/redux/thunks/delete-issue';
 import Button from 'react-bootstrap/Button';
 import IssueModal from '../../common/Modal/IssueModal';
 
+import translateIssueStatus from '../../../lib/issue/utils/translateIssueStatus';
+
 const IssueListItem = ({ issueId, projectId }) => {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
@@ -27,7 +29,7 @@ const IssueListItem = ({ issueId, projectId }) => {
   return (
     <div className={css['IssueListItem']}>
       <h3>{issue.title}</h3>
-      <p className={css['status']}>{issue.status}</p>
+      <p className={css['status']}>{translateIssueStatus(issue.status)}</p>
 
       <div className={css['actions']}>
         <Button
