@@ -1,6 +1,5 @@
 import projectActions from '../actions';
 import authSelectors from '../../../auth/redux/selector';
-import issueActions from '../../../issue/redux/actions';
 import loadProjects from './load-projects';
 
 const deleteProject = (projectId) => async (dispatch, getState) => {

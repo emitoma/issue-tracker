@@ -35,7 +35,6 @@ const LoginForm = () => {
     };
     dispatch(login({ formData, setFormErrors }));
   };
-  console.log('formerr', formErrors);
 
   if (isLoggedIn) {
     return <Redirect to="/projects" />;

@@ -1,19 +1,14 @@
 import React, { memo } from 'react';
-import { Redirect, NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import classNames from 'classnames';
+import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-import authSelectors from '../../lib/auth/redux/selector';
 import authActions from '../../lib/auth/redux/actions';
-import projectActions from '../../lib/project/redux/actions';
-import issueActions from '../../lib/issue/redux/actions';
 
+import classNames from 'classnames';
 import css from './style.module.scss';
 
 const Navbar = ({ className }) => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
-  const links = ['Inbox', 'Projects', 'Settings'];
 
   const classList = classNames(className, css['Nav']);
 
@@ -28,7 +23,7 @@ const Navbar = ({ className }) => {
       <ul className={css['Nav-list']}>
         <li>
           <NavLink
-            to="/projects/5"
+            to="/"
             className={css['Nav-list-link']}
             activeClassName={css['active']}
           >
@@ -46,7 +41,7 @@ const Navbar = ({ className }) => {
         </li>
         <li>
           <NavLink
-            to="/projects"
+            to="/"
             className={css['Nav-list-link']}
             activeClassName={css['active']}
           >

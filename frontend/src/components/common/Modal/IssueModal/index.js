@@ -15,7 +15,6 @@ import Form from 'react-bootstrap/Form';
 const IssueModal = ({ projectId, show, setShow, issueId = null }) => {
   const dispatch = useDispatch();
 
-  console.log('issueID', issueId);
   const issue = useSelector((state) => {
     if (!issueId) {
       return null;
@@ -23,7 +22,6 @@ const IssueModal = ({ projectId, show, setShow, issueId = null }) => {
 
     return issueSelectors.getIssueById(state, issueId);
   });
-  console.log('issue', issue);
 
   const errors = useSelector(issueSelectors.getIssueErrors);
   const isSaved = useSelector(issueSelectors.getIsIssueSaved);
@@ -42,7 +40,6 @@ const IssueModal = ({ projectId, show, setShow, issueId = null }) => {
     };
 
     if (issue) {
-      console.log(projectId, issueId, formData);
       dispatch(updateIssue(projectId, issueId, formData));
     } else {
       dispatch(addIssue(projectId, formData));
@@ -53,6 +50,7 @@ const IssueModal = ({ projectId, show, setShow, issueId = null }) => {
     if (isSaved || isEdited) {
       setShow(false);
     }
+    //eslint-disable-next-line
   }, [isSaved, isEdited]);
 
   useEffect(() => {
@@ -62,6 +60,7 @@ const IssueModal = ({ projectId, show, setShow, issueId = null }) => {
       dispatch(issueActions.setIsIssueSaved(false));
       dispatch(issueActions.clearErrors());
     }
+    //eslint-disable-next-line
   }, [show]);
 
   useEffect(() => {

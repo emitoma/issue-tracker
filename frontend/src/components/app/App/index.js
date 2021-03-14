@@ -16,6 +16,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initAuth());
+    //eslint-disable-next-line
   }, []);
 
   if (!isAuthInitialized) {

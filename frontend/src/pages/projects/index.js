@@ -19,7 +19,6 @@ const Projects = () => {
   const isInitialized = useSelector(ProjectSelectors.getIsInitialized);
   const isLoading = useSelector(ProjectSelectors.getIsLoading);
   const projectIds = useSelector(ProjectSelectors.getProjectIds);
-  const error = useSelector(ProjectSelectors.getProjectErrors);
 
   const [show, setShow] = useState(false);
 
@@ -27,6 +26,7 @@ const Projects = () => {
     if (!isLoading && !isInitialized) {
       dispatch(loadProjects());
     }
+    //eslint-disable-next-line
   }, [isLoading, isInitialized]);
 
   useEffect(() => {
@@ -34,6 +34,7 @@ const Projects = () => {
     return () => {
       dispatch(projectActions.clearProject());
     };
+    //eslint-disable-next-line
   }, []);
 
   const showModal = () => {

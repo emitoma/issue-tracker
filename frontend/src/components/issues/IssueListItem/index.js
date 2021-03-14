@@ -17,7 +17,6 @@ const IssueListItem = ({ issueId, projectId }) => {
   );
 
   const handleDelete = () => {
-    console.log('component id', issueId);
     dispatch(deleteIssue(issue.project_id, issue.id));
   };
 

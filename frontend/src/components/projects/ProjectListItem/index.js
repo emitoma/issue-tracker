@@ -14,7 +14,6 @@ const ProjectListItem = ({ id }) => {
   );
 
   const onClickHandler = () => {
-    console.log(project);
     dispatch(deleteProject(project.id));
   };
 

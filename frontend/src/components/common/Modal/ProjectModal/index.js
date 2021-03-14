@@ -36,6 +36,7 @@ const ProjectModal = ({ show, setShow }) => {
     if (isSaved) {
       setShow(false);
     }
+    //eslint-disable-next-line
   }, [isSaved]);
 
   useEffect(() => {
@@ -45,6 +46,7 @@ const ProjectModal = ({ show, setShow }) => {
       dispatch(projectActions.setIsProjectSaved(false));
       dispatch(projectActions.clearErrors());
     }
+    //eslint-disable-next-line
   }, [show]);
 
   return ReactDOM.createPortal(

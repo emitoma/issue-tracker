@@ -10,7 +10,6 @@ const AddProjectForm = ({
   setDescription,
   errors,
 }) => {
-  console.log(errors);
   return (
     <>
       {errors.general && <Alert variant="danger">{errors.general}</Alert>}

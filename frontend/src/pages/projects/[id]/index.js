@@ -26,12 +26,14 @@ const IssueList = () => {
     if (!isLoading && !isInitialized) {
       dispatch(loadIssues(projectId));
     }
+    //eslint-disable-next-line
   }, [isLoading, isInitialized, projectId]);
 
   useEffect(() => {
     return () => {
       dispatch(issueActions.clearIssues());
     };
+    //eslint-disable-next-line
   }, []);
 
   const showModal = () => {
