@@ -19,12 +19,17 @@ const ProjectListItem = ({ id }) => {
   };
 
   return (
-    <div className={css.ProjectListItem}>
-      <Link to={`/projects/${id}`} className={css['projectTitle']}>
+    <div className={css['Project']}>
+      <Link to={`/projects/${id}`} className={css['Project-title']}>
         {project.name}
       </Link>
-      <p>id: {project.id}</p>
-      <Button type="button" variant="danger" onClick={onClickHandler}>
+      <p className={css['Project-description']}>{project.description}</p>
+      <Button
+        className={css['Project-button']}
+        type="button"
+        variant="danger"
+        onClick={onClickHandler}
+      >
         Delete
       </Button>
     </div>

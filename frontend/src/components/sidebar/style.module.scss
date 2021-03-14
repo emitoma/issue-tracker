@@ -25,6 +25,8 @@
     list-style: none;
 
     &-link {
+      @include border;
+      border: none;
       font-size: 18px;
       font-weight: 300;
       width: 200px;
@@ -32,7 +34,6 @@
       color: $color_white;
       text-decoration: none;
       display: block;
-      @include borderRadius;
       margin-bottom: 44px;
       padding: 8px;
 

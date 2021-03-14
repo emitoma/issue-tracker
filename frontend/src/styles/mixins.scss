@@ -1,9 +1,11 @@
-@mixin borderRadius {
+@import 'variables';
+@mixin border {
+  border: solid $color_black 1px;
   border-radius: 15px;
 }
 
 @mixin pageLayout {
   height: 100vh;
   display: grid;
-  grid-template-columns: [first-start] 350px [first-end second-start] auto [second-end];
+  grid-template-columns: [first-start] 300px [first-end second-start] auto [second-end];
 }

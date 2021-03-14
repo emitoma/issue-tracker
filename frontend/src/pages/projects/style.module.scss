@@ -5,6 +5,7 @@
   @include pageLayout();
 
   &-list {
+    margin: 5%;
     grid-column-start: second-start;
     grid-column-end: second-end;
     display: grid;
