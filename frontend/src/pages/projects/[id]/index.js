@@ -45,16 +45,18 @@ const IssueList = () => {
 
         <div className={css['wrapper']}>
           <h2>Issues</h2>
-          <Button
-            size="lg"
-            block
-            className={css['Issues-button']}
-            variant="primary"
-            type="submit"
-            onClick={showModal}
-          >
-            Add New Issue
-          </Button>
+
+          <div>
+            <Button
+              className={css['Issues-button']}
+              variant="primary"
+              type="submit"
+              onClick={showModal}
+            >
+              Add New Issue
+            </Button>
+          </div>
+
           <div className={css['Issues-list']}>
             {issueIds.map((id) => (
               <IssueListItem key={id} issueId={id} projectId={projectId} />

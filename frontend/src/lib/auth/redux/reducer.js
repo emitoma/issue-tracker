@@ -80,8 +80,15 @@ const authReducer = (state = initialState, action) => {
         isLoggedIn: action.payload.isLoggedIn,
       };
 
-    case authActionTypes.CLEAR_AUTH:
-      return initialState;
+    case authActionTypes.LOGOUT:
+      return {
+        isRegistered: false,
+        token: null,
+        isInitialized: true,
+        isLoggedIn: false,
+        registerErrors: [],
+        loginErrors: [],
+      };
 
     default:
       return state;

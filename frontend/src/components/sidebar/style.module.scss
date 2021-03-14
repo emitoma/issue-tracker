@@ -36,7 +36,8 @@
       margin-bottom: 44px;
       padding: 8px;
 
-      &:hover {
+      &:hover,
+      .active {
         color: $color_white;
         text-decoration: none;
         background: $color_dark_blue;

@@ -45,9 +45,13 @@ const setIsLoggedIn = (isLoggedIn) => ({
   payload: { isLoggedIn },
 });
 
-const clearAuth = () => ({
-  type: authActionTypes.CLEAR_AUTH,
-});
+const logout = () => {
+  localStorage.removeItem('token');
+
+  return {
+    type: authActionTypes.LOGOUT,
+  };
+};
 
 const authActions = {
   registerRequest,
@@ -55,7 +59,7 @@ const authActions = {
   registerError,
 
   clearErrors,
-  clearAuth,
+  logout,
 
   loginRequest,
   loginSuccess,

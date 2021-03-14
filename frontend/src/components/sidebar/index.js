@@ -18,14 +18,7 @@ const Navbar = ({ className }) => {
   const classList = classNames(className, css['Nav']);
 
   const handleClick = () => {
-    dispatch(authActions.clearAuth());
-    dispatch(projectActions.clearProject());
-    dispatch(issueActions.clearIssues());
-
-    localStorage.removeItem('token');
-
-    return <Redirect to="/auth/login" />;
-    //TODO fix redirect
+    dispatch(authActions.logout());
   };
 
   return (
@@ -34,7 +27,11 @@ const Navbar = ({ className }) => {
       <h2 className={css['Nav-greeting']}>Welcome back!</h2>
       <ul className={css['Nav-list']}>
         <li>
-          <NavLink to="/projects/5" className={css['Nav-list-link']}>
+          <NavLink
+            to="/projects/5"
+            className={css['Nav-list-link']}
+            activeClassName={css['active']}
+          >
             Inbox
           </NavLink>
         </li>
@@ -48,7 +45,11 @@ const Navbar = ({ className }) => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/projects" className={css['Nav-list-link']}>
+          <NavLink
+            to="/projects"
+            className={css['Nav-list-link']}
+            activeClassName={css['active']}
+          >
             Settings
           </NavLink>
         </li>
