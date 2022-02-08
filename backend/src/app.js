@@ -19,6 +19,8 @@ app.get('/', (req, res) => {
   res.send('Hello world');
 });
 
+app.get('/api/auth', authRouter);
+
 app.use('/api/auth', authRouter);
 
 app.use('/api/projects/:projectId/issues', issuesRouter);

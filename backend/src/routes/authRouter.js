@@ -3,6 +3,13 @@ const authService = require('../services/authService');
 
 const router = express.Router();
 
+router.get('/me', async (req, res) => {
+  console.log('token', req.headers);
+  const data = await authService.getMe(req.headers.authorization);
+
+  res.status(200).json(data);
+});
+
 router.post('/register', async (req, res) => {
   const data = await authService.register(
     req.body.email,
@@ -10,6 +17,8 @@ router.post('/register', async (req, res) => {
     req.body.passwordAgain
   );
   console.log('router data', data);
+
+  console.log(typeof data.status);
 
   if (data.status === 200) {
     res.status(200).json(data);
@@ -25,7 +34,7 @@ router.post('/login', async (req, res) => {
 
   const data = await authService.login(req.body.email, req.body.password);
 
-  console.log(data);
+  console.log(data.status);
 
   if (data.status === 200) {
     res.status(200).json(data);

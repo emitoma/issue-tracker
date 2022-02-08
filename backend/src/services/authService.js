@@ -105,6 +105,9 @@ const login = async (email, password) => {
     }
 
     const dbUser = await userQueries.findUserForLogin(email);
+
+    console.log(typeof(dbUser));
+    
     if (!dbUser) {
       return {
         status: 403,
@@ -137,10 +140,21 @@ const login = async (email, password) => {
   }
 };
 
+const getMe = async (token) => {
+  const decodedToken = await authService.verifyJWTToken(token);
+  const user = await userQueries.findUserByEmail(decodedToken.email);
+
+  if (user) {
+    console.log('user', user);
+  }
+  return 'user found';
+};
+
 const authService = {
   register,
   login,
   verifyJWTToken,
+  getMe,
 };
 
 module.exports = authService;
